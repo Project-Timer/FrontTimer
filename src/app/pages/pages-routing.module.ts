@@ -13,14 +13,10 @@ const routes: Routes = [{
       path: 'dashboard',
       component: DashboardComponent,
     },
-    {
-      path: 'mysys',
-      // loadChildren: './mysys/mysys.module#MysysModule',
-    },
     
     {
       path: 'miscellaneous',
-      // loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
+      loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
     },
     
     {
