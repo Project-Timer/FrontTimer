@@ -1,0 +1,9 @@
+{
+    "clientID" : "8e90ca10-d518-4610-a636-996fd357a951",
+    "urlAccueil":"/demo-front/home",
+    "urlAPIV1":"/demo/v1/api/",
+    "urlV1":"/demo/v1/#!/",
+    "urlV2":"/demo-front/",
+	"pictoAddress": "https://zenoffice-integ.ineodigital.fr/demo/picture/",
+    "env":"DEMO"
+}

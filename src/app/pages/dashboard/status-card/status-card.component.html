@@ -1,0 +1,11 @@
+<nb-card (click)="moveToPlatformPage()">
+    <div class="icon-container">
+        <div class="icon">
+            <ng-content ></ng-content>
+            <img class="img-fluid" src="{{src}}" alt="ico"/>
+        </div>
+    </div>
+    <div class="details">
+        <div class="title">{{ title }}</div>
+    </div>
+</nb-card>

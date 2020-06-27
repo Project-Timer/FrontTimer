@@ -1,0 +1,14 @@
+{
+    "clientID" : "75819db6-3601-4c59-9cec-575d678f71a5",
+    "urlAccueil":"/front/home",
+    "urlAPIV1":"/v1/api/",
+    "urlV1":"/v1/#!/",
+    "urlV2":"/front/",
+    "pictoAddress": "https://zenoffice-integ.ineodigital.fr/picture/",
+    "env":"DEV",
+    "mapwize":{
+        "api_key": "55b75105261e7b40eeafa41f4288f5a8",
+        "organization_id": "5963f8102a12bd001a569670",
+        "universe_id": "5a02a94f11255000113e3b3c"
+    }
+}

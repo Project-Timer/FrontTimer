@@ -1,0 +1,9 @@
+{
+    "clientID" : "81df0c0e-c6e4-4c1c-9dd2-de57ce8bd5e3",
+    "urlAccueil":"/front/home",
+    "urlAPIV1":"/v1/api/",
+    "urlV1":"/v1/#!/",
+    "urlV2":"/front/",
+	"pictoAddress": "https://pp-pilotes-zenoffice.engie-ineo.fr/picture/",
+    "env":"PREPROD"
+}
