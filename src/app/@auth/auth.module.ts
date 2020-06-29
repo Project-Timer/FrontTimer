@@ -41,8 +41,8 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
             endpoint: '/login',
             method: 'post',
             redirect:{
-              success: '/',
-              failure: '/register',
+              success: '/pages/dashboard',
+              failure: '/login',
             },
           },
           register: {
