@@ -4,8 +4,7 @@
       <nb-icon icon="menu-outline"></nb-icon>
     </a>
     <div class="title" (click)="goToHome()" nbButton>
-      <img class="picture" src="assets/images/favicon.png" alt="ico" />
-    </div>
+      Work<span style="color:blueviolet">&</span>Out </div>
   </div>
   <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
     <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>

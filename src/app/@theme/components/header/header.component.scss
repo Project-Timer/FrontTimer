@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     width: auto;
-    padding: 0;;
+    padding: 0;
     
     .sidebar-toggle {
       text-decoration: none;
@@ -54,12 +54,12 @@
         font-size: 2rem;
       }
     }
-
     .title {
-      width: auto;
-      height: auto;
-      // margin-left: 0%;
-      // margin-right: 7%;
+      margin: 2rem 2rem;
+      font-weight: normal;
+      font-size: 120%;
+      white-space: nowrap;
+      text-decoration: none;
     }
   }
 
