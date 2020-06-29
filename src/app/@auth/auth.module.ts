@@ -59,7 +59,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
             endpoint: '/logout',
             method: 'post',
             redirect: {
-              success: '/',
+              success: '/login',
               failure: '/',
             },
           },
