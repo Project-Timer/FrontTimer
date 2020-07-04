@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './logout.component.html',
 })
 export class NgxLogoutComponent extends NbLogoutComponent implements OnInit {
+  loading :boolean = false
   constructor(
     protected service: NbAuthService,
     @Inject(NB_AUTH_OPTIONS) protected options = {},
@@ -17,6 +18,16 @@ export class NgxLogoutComponent extends NbLogoutComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
+  }
+  
+  logout() {
+
+    this.loading = true
+    setTimeout(() => {
+      this.router.navigate(['/auth/login'])
+      this.loading = false}
+      , 1500);
+    
   }
 
 }
