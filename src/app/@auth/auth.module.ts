@@ -42,7 +42,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
             method: 'post',
             redirect:{
               success: '/pages/dashboard',
-              failure: '/login',
+              failure: '/auth/login',
             },
           },
           register: {
@@ -50,7 +50,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
             method: 'post',
             redirect: {
               success: '/',
-              failure: '/register',
+              failure: '/auth/register',
             },
             defaultErrors: ["Une erreur s'est produite. Veuillez réessayer"],
             defaultMessages: ['Vous êtes bien enregistré'],
