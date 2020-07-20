@@ -7,7 +7,7 @@ export class PagesMenu {
 
   getMenu(role): Observable<NbMenuItem[]> {
     const dashboardMenu = [
-      
+
       {
         title: 'DASHBOARD',
         icon: 'npm-outline',
@@ -18,10 +18,15 @@ export class PagesMenu {
             link: '/pages/dashboard',
             icon: 'home-outline',
           },
-        
+          {
+            title: 'GROUPS',
+            link: '/pages/groups',
+            icon: 'people-outline',
+          },
+
         ],
       },
-      
+
     ];
     return observableOf([...dashboardMenu/* , ...menu */]);
   }

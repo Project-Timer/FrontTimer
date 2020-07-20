@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component'
-
+import {GroupListComponent} from './groups/group-list/group-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,12 +13,17 @@ const routes: Routes = [{
       path: 'dashboard',
       component: DashboardComponent,
     },
-    
+
     {
       path: 'miscellaneous',
       loadChildren: './miscellaneous/miscellaneous.module#MiscellaneousModule',
     },
-    
+
+    {
+      path: 'groups',
+      component: GroupListComponent,
+    },
+
     {
       path: '',
       redirectTo: 'dashboard',
