@@ -1,0 +1,19 @@
+<nb-layout>
+  <nb-layout-column>
+    <nb-card *ngFor="let group of groups">
+      <nb-card-header>{{ group.name }} - <small>Created on {{ group.dateCreate|date:'mediumDate' }}</small>
+      </nb-card-header>
+      <nb-card-body>
+        <ng-container *ngIf="group.members.length > 0; then list else empty"></ng-container>
+        <ng-template #list>
+          <nb-list>
+            <nb-list-item *ngFor="let member of group.members">
+              {{ member.lastname + ' ' + member.name }}
+            </nb-list-item>
+          </nb-list>
+        </ng-template>
+        <ng-template #empty>No member in this group</ng-template>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>
