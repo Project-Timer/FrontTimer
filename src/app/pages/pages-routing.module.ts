@@ -2,8 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NotFoundComponent } from './miscellaneous/not-found/not-found.component'
-import {GroupListComponent} from './groups/group-list/group-list.component';
+import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,7 +20,7 @@ const routes: Routes = [{
 
     {
       path: 'groups',
-      component: GroupListComponent,
+      loadChildren: './groups/groups.module#GroupsModule',
     },
 
     {
