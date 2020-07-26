@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from '../group.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-group-view',
@@ -9,8 +9,9 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class GroupViewComponent implements OnInit {
   private group;
+  private editMode = false;
 
-  constructor(private groupService: GroupService, private route: ActivatedRoute) {
+  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
@@ -20,6 +21,24 @@ export class GroupViewComponent implements OnInit {
   getGroup() {
     this.groupService.getGroup(this.route.snapshot.params.id).subscribe(data => {
       this.group = data;
+    });
+  }
+
+  changeMode() {
+    this.editMode = !this.editMode;
+  }
+
+  save() {
+    this.groupService.updateGroup(this.group).subscribe(data => {
+      this.group = data;
+    });
+  }
+
+  delete() {
+    this.groupService.deleteGroup(this.group).subscribe(res => {
+      if (res.status === 200) {
+        this.router.navigate(['/pages/groups']);
+      }
     });
   }
 }
