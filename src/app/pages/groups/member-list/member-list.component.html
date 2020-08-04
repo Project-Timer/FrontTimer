@@ -1,0 +1,18 @@
+<ng-container *ngIf="show">
+  <ng-container *ngIf="members.length > 0; then list else empty"></ng-container>
+  <ng-template #list>
+    <nb-list>
+      <nb-list-item *ngFor="let member of members">
+        <p>
+          {{ member.lastname + ' ' + member.name }}
+        </p>
+        <p>
+          {{ member.email }}
+        </p>
+      </nb-list-item>
+    </nb-list>
+  </ng-template>
+  <ng-template #empty>
+    <div class="h6">No member in this group</div>
+  </ng-template>
+</ng-container>
