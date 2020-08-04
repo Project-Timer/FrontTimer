@@ -15,8 +15,4 @@ export class MemberListComponent implements OnInit {
   ngOnInit() {
     this.show = false;
   }
-
-  public changeVisibility() {
-    this.show = !this.show;
-  }
 }

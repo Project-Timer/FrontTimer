@@ -1,18 +1,24 @@
 <ng-container *ngIf="show">
-  <ng-container *ngIf="members.length > 0; then list else empty"></ng-container>
-  <ng-template #list>
-    <nb-list>
-      <nb-list-item *ngFor="let member of members">
-        <p>
-          {{ member.lastname + ' ' + member.name }}
-        </p>
-        <p>
-          {{ member.email }}
-        </p>
-      </nb-list-item>
-    </nb-list>
-  </ng-template>
-  <ng-template #empty>
-    <div class="h6">No member in this group</div>
-  </ng-template>
+  <div class="position-absolute" style="width: 95%;
+background-color: white;
+z-index: 99999;
+overflow-y: scroll;
+max-height: 15em;">
+    <ng-container *ngIf="members.length > 0; then list else empty"></ng-container>
+    <ng-template #list>
+      <nb-list>
+        <nb-list-item *ngFor="let member of members">
+          <p>
+            {{ member.lastname + ' ' + member.name }}
+          </p>
+          <p>
+            {{ member.email }}
+          </p>
+        </nb-list-item>
+      </nb-list>
+    </ng-template>
+    <ng-template #empty>
+      <div class="h6">No member in this group</div>
+    </ng-template>
+  </div>
 </ng-container>

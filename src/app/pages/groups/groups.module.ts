@@ -6,6 +6,7 @@ import {GroupsRoutingModule} from './groups-routing.module';
 import {GroupViewComponent} from './group-view/group-view.component';
 import {FormsModule} from '@angular/forms';
 import { MemberListComponent } from './member-list/member-list.component';
+import { GroupBoxComponent } from './group-box/group-box.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MemberListComponent } from './member-list/member-list.component';
     GroupListComponent,
     GroupViewComponent,
     MemberListComponent,
+    GroupBoxComponent,
   ],
 })
 export class GroupsModule {
