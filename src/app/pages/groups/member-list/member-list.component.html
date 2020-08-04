@@ -1,15 +1,11 @@
 <ng-container *ngIf="show">
-  <div class="position-absolute" style="width: 95%;
-background-color: white;
-z-index: 99999;
-overflow-y: scroll;
-max-height: 15em;">
+  <nb-card class="position-absolute list">
     <ng-container *ngIf="members.length > 0; then list else empty"></ng-container>
     <ng-template #list>
       <nb-list>
         <nb-list-item *ngFor="let member of members">
           <p>
-            {{ member.lastname + ' ' + member.name }}
+            {{ member.lastname + ' ' + member.name }} <b>({{ member.role|titlecase }})</b>
           </p>
           <p>
             {{ member.email }}
@@ -20,5 +16,5 @@ max-height: 15em;">
     <ng-template #empty>
       <div class="h6">No member in this group</div>
     </ng-template>
-  </div>
+  </nb-card>
 </ng-container>

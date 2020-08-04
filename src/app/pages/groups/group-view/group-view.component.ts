@@ -41,4 +41,10 @@ export class GroupViewComponent implements OnInit {
       }
     });
   }
+
+  deleteMember(member: any) {
+    const index = this.group.user.indexOf(member);
+    this.group.user.splice(index, 1);
+    this.save();
+  }
 }
