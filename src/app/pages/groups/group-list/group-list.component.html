@@ -1,4 +1,11 @@
-<h1 class="m-0 mb-4">Groups</h1>
+<h1 class="m-0 mb-4">
+  Groups
+  <a [routerLink]="'add'" class="ml-2">
+    <button nbButton size="tiny" shape="semi-round" status="success">
+      <nb-icon icon="plus-outline"></nb-icon>
+    </button>
+  </a>
+</h1>
 <ng-container *ngIf="groups?.length > 0; then list else empty"></ng-container>
 <ng-template #list>
   <div class="row">

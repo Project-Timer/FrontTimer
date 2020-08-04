@@ -7,6 +7,7 @@ import {GroupViewComponent} from './group-view/group-view.component';
 import {FormsModule} from '@angular/forms';
 import { MemberListComponent } from './member-list/member-list.component';
 import { GroupBoxComponent } from './group-box/group-box.component';
+import { GroupFormComponent } from './group-form/group-form.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { GroupBoxComponent } from './group-box/group-box.component';
     GroupViewComponent,
     MemberListComponent,
     GroupBoxComponent,
+    GroupFormComponent,
   ],
 })
 export class GroupsModule {

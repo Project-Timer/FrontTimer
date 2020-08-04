@@ -32,6 +32,10 @@ export class GroupService {
     return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions);
   }
 
+  addGroup(group: any) {
+    return this.http.post<any>(this.baseEndPoint + '/group/add', JSON.stringify(group), this.httpOptions);
+  }
+
   updateGroup(group: any) {
     return this.http.put<any>(this.baseEndPoint + '/group/' + group._id, JSON.stringify(group), this.httpOptions);
   }
