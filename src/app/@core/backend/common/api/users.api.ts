@@ -36,7 +36,7 @@ export class UsersApi {
     return this.api.put(`${this.apiController}/current`, item);
   }
 
-  update(item: any): Observable<any> {
-    return this.api.put(`${this.apiController}/${item.id}`, item);
+  update(user: any): Observable<any> {
+    return this.api.put(`${this.apiController}/${user.id}`, user);
   }
 }

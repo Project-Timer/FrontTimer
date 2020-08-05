@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   goToHome() {
-    this.menuService.navigateHome();
+    this.menuService.navigateHome("/pages/dashboard");
   }
 
   ngOnDestroy() {

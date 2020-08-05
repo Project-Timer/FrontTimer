@@ -50,6 +50,7 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { UserData } from '../@core/interfaces/common/users';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -102,6 +103,7 @@ export class ThemeModule {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
       providers: [
+        UserData,
         ...NbThemeModule.forRoot(
           {
             name: 'default',
