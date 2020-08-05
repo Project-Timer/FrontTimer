@@ -40,11 +40,11 @@
   </div>
 
   <div class="form-control-group">
-    <!-- <span class="label-with-link">
+    <span class="label-with-link">
       <label class="label" for="input-password">Mot de Passe:</label>
-      <a class="forgot-password caption-2" routerLink="../request-password">Mot de passe oublié?</a>
-    </span> -->
-    <label class="label" for="input-password">Mot de passe</label>
+      <a class="forgot-password caption-2" href="../#/auth/request-password" routerLink="../#/auth/request-password">Mot de passe oublié?</a>
+    </span>
+
     <input nbInput
            fullWidth
            [(ngModel)]="user.password"
