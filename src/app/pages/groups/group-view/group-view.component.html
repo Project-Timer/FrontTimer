@@ -16,10 +16,25 @@
     </button>
   </div>
 
-  <div class="h4 mt-4">Members</div>
+  <div class="h4 mt-4">
+    Members
+    <button nbButton size="tiny" shape="semi-round" status="basic" (click)="showFormMembers()">
+      {{ show === false ? 'Add new' : 'Close' }}
+    </button>
+  </div>
+
+  <ng-container *ngIf="show">
+    <nb-select [(ngModel)]="selectedValue" multiple placeholder="Choose members" shape="semi-round" class="search-input">
+      <nb-option *ngFor="let member of members" value="{{ member._id }}">{{ member.lastname + ' ' + member.name }}</nb-option>
+    </nb-select>
+    <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="addUser()">
+      <nb-icon icon="checkmark-outline"></nb-icon>
+    </button>
+  </ng-container>
+
   <ng-container *ngIf="group.user.length > 0; then list else empty"></ng-container>
   <ng-template #list>
-    <div class="row">
+    <div class="row mt-4">
       <div class="col-6" *ngFor="let member of group.user">
         <nb-card class="member">
           <div class="row">
@@ -42,6 +57,6 @@
     </div>
   </ng-template>
   <ng-template #empty>
-    <div class="h6">No member in this group</div>
+    <div class="h6 mt-4">No member in this group</div>
   </ng-template>
 </ng-container>

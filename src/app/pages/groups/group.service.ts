@@ -24,6 +24,10 @@ export class GroupService {
       });
   }
 
+  getAllMembers() {
+    return this.http.get<any[]>(this.baseEndPoint + '/user', this.httpOptions);
+  }
+
   getAllGroups() {
     return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions);
   }
@@ -42,5 +46,13 @@ export class GroupService {
 
   deleteGroup(group: any) {
     return this.http.delete(this.baseEndPoint + '/group/' + group._id, {observe: 'response'});
+  }
+
+  getAdmin(group) {
+    for (const member of group.user) {
+      if (member.role === 'admin') {
+        return member.user_id;
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
+import {GroupService} from '../group.service';
 
 @Component({
   selector: 'ngx-group-box',
@@ -12,7 +13,7 @@ export class GroupBoxComponent implements OnInit {
   @Input() group: any;
   @Output() show: boolean;
 
-  constructor(private tokenService: NbTokenService) {
+  constructor(private tokenService: NbTokenService, private groupService: GroupService) {
   }
 
   ngOnInit() {
@@ -23,11 +24,7 @@ export class GroupBoxComponent implements OnInit {
   }
 
   getAdmin(group) {
-    for (const member of group.user) {
-      if (member.role === 'admin') {
-        return member.user_id;
-      }
-    }
+    return this.groupService.getAdmin(group);
   }
 
   public showMembers() {
