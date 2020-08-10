@@ -13,7 +13,8 @@ export class NgxProfileComponent {
   user: {
     id: string,
     name: string,
-    role: string
+    role: string,
+    group: string,
   };
   alive: boolean = true;
 
