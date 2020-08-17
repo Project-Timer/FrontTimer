@@ -1,0 +1,12 @@
+<input type="text" [(ngModel)]="project.name" class="mt-4" nbInput fieldSize="large" shape="semi-round"
+       placeholder="Name">
+
+<nb-select [(ngModel)]="selectedValue" multiple placeholder="Choose group" fieldSize="large" shape="semi-round"
+           class="ml-2 search-input">
+  <nb-option *ngFor="let group of groups" value="{{ group._id }}">{{ group.name }}</nb-option>
+</nb-select>
+
+<button class="ml-2" nbButton size="tiny" shape="semi-round" fieldSize="large" status="success" (click)="save();">
+  <nb-icon icon="save-outline"></nb-icon>
+  Save
+</button>

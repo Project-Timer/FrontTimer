@@ -1,0 +1,22 @@
+<h1 class="m-0">
+  Projects
+  <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="showFormProject()">
+    <nb-icon icon="{{ show === false ? 'plus-outline' : 'minus-outline' }}"></nb-icon>
+  </button>
+</h1>
+
+<ng-container *ngIf="show">
+  <ngx-project-form (someEvent)="getAllProject()"></ngx-project-form>
+</ng-container>
+
+<ng-container *ngIf="projects?.length > 0; then list else empty"></ng-container>
+<ng-template #list>
+  <div class="row mt-4">
+    <div class="col-6" *ngFor="let project of projects">
+      <ngx-project-box [project]="project"></ngx-project-box>
+    </div>
+  </div>
+</ng-template>
+<ng-template #empty>
+  <div class="h6">There are no projects</div>
+</ng-template>

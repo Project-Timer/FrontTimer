@@ -23,6 +23,11 @@ export class PagesMenu {
             link: '/pages/groups',
             icon: 'people-outline',
           },
+          {
+            title: 'PROJECTS',
+            link: '/pages/project',
+            icon: 'briefcase-outline',
+          },
 
         ],
       },

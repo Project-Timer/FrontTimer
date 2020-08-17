@@ -24,6 +24,11 @@ const routes: Routes = [{
     },
 
     {
+      path: 'project',
+      loadChildren: './project/project.module#ProjectModule',
+    },
+
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

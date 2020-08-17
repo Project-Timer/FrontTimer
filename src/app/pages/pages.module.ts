@@ -8,6 +8,7 @@ import {ThemeModule} from '../@theme/theme.module';
 import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 import {PagesMenu} from './pages-menu';
 import {GroupsModule} from './groups/groups.module';
+import {ProjectModule} from './project/project.module';
 
 
 const PAGES_COMPONENTS = [
@@ -23,6 +24,7 @@ const PAGES_COMPONENTS = [
     NbMenuModule,
     NbSelectModule,
     GroupsModule,
+    ProjectModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
