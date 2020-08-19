@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from '../group.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-group-list',
@@ -11,20 +11,12 @@ import {Router} from '@angular/router';
 export class GroupListComponent implements OnInit {
   private groups;
   private show = false;
-  private group: {
-    name: string,
-    user: [],
-  };
 
-  constructor(private groupService: GroupService, private router: Router) {
+  constructor(private groupService: GroupService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.getAllGroups();
-    this.group = {
-      name: '',
-      user: [],
-    };
+    this.groups = this.route.snapshot.data.groups;
   }
 
   getAllGroups() {
@@ -35,12 +27,5 @@ export class GroupListComponent implements OnInit {
 
   showFormGroup() {
     this.show = !this.show;
-  }
-
-  save() {
-    this.groupService.addGroup(this.group).subscribe(res => {
-      this.group.name = '';
-      this.getAllGroups();
-    });
   }
 }
