@@ -1,24 +1,57 @@
 <ng-container *ngIf="project">
-  <h1 class="m-0 groupName" *ngIf="!editMode">
+  <h1 class="m-0 projectName" *ngIf="!editMode">
     <span (click)="changeMode()">{{ project.name }}</span>
     <button class="ml-2" nbButton size="tiny" shape="semi-round" status="primary" (click)="changeMode()">
       <nb-icon icon="edit-outline"></nb-icon>
     </button>
+    <button class="ml-2" nbButton size="tiny" shape="semi-round" status="danger" (click)="delete()">
+      <nb-icon icon="trash-2-outline"></nb-icon>
+    </button>
   </h1>
   <div *ngIf="editMode">
     <input type="text" [(ngModel)]="project.name" nbInput fieldSize="large" shape="semi-round">
+    <button class="ml-2" nbButton size="tiny" shape="semi-round" fieldSize="large" status="success"
+            (click)="save(); editMode = false">
+      <nb-icon icon="edit-outline"></nb-icon>
+    </button>
   </div>
+
+  <div class="h4 mt-4">
+    Groups
+    <button nbButton size="tiny" shape="semi-round" status="basic" (click)="showFormGroups()">
+      {{ show === false ? 'Add new' : 'Close' }}
+    </button>
+  </div>
+
+  <ng-container *ngIf="show">
+    <nb-select [(ngModel)]="selectedValue" multiple placeholder="Choose groups" shape="semi-round" class="search-input">
+      <nb-option *ngFor="let group of groups" value="{{ group.group_id }}">{{ group.name }}</nb-option>
+    </nb-select>
+    <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="addGroup()">
+      <nb-icon icon="checkmark-outline"></nb-icon>
+    </button>
+  </ng-container>
 
   <ng-container *ngIf="project.group.length > 0; then list else empty"></ng-container>
   <ng-template #list>
     <div class="row mt-4">
       <div class="col-6" *ngFor="let group of project.group">
-        <nb-card class="member">
+        <nb-card class="group">
           <div class="row">
-            <div class="col-10">
+            <div class="col-9">
               <p>
                 {{ group.name }}
               </p>
+            </div>
+            <div class="col-3">
+              <a [routerLink]="'/pages/groups/view/'+[group.group_id]">
+                <button nbButton size="tiny" shape="semi-round" status="primary">
+                  <nb-icon icon="eye-outline"></nb-icon>
+                </button>
+              </a>
+              <button (click)="deleteGroup(group)" class="ml-2" nbButton size="tiny" shape="semi-round" status="danger">
+                <nb-icon icon="trash-2-outline"></nb-icon>
+              </button>
             </div>
           </div>
         </nb-card>
