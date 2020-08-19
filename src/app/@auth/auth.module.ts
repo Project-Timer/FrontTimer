@@ -63,14 +63,26 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
               failure: '/',
             },
           },
-          // requestPass: {
-          //   endpoint: '/auth/request-pass',
-          //   method: 'post',
-          // },
-          // resetPass: {
-          //   endpoint: '/auth/reset-pass',
-          //   method: 'post',
-          // },
+          requestPass: {
+            endpoint: '/request-pass',
+            method: 'post',
+            redirect: {
+              success: '/',
+              failure: '/auth/request-pass',
+            },
+            defaultErrors: ["Une erreur s'est produite. Veuillez réessayer"],
+            defaultMessages: ['Vous êtes bien enregistré'],
+          },
+          resetPass: {
+            endpoint: '/reset-pass',
+            method: 'post',
+            redirect: {
+              success: '/',
+              failure: '/auth/reset-pass',
+            },
+            defaultErrors: ["Une erreur s'est produite. Veuillez réessayer"],
+            defaultMessages: ['Vous êtes bien enregistré'],
+          },
           token: {
             class: NbAuthJWTToken,
             key: 'token',

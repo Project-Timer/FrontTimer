@@ -3,12 +3,19 @@
 
 <div class="form-control-group">
     <label class="label" size="large">Identifiant</label>
-    <input nbInput fullWidth value="{{user.id}}" fieldSize="large" autofocus disabled>
-    <div class="form-control-group">
-        <label class="label"  size="large">Nom</label>
-        <input nbInput fullWidth value="{{user.name}}" fieldSize="large" autofocus disabled>
-        <div class="form-control-group">
-            <label class="label" size="large">Groupe</label>
-            <!-- a changer le role par groupe -->
-            <input nbInput fullWidth value="{{user.role}}" fieldSize="large" autofocus disabled>
-        </div>
+    <input nbInput fullWidth value="{{user.id}}" fieldSize="large" autofocus >
+</div>
+<div class="form-control-group">
+    <label class="label"  size="large">Nom</label>
+    <input nbInput fullWidth value="{{user.name}}" fieldSize="large"  >
+</div>
+<div class="form-control-group">
+    <label class="label" size="large">Role</label>
+    <input nbInput fullWidth value="{{user.role}}" fieldSize="large"  >
+</div>
+<div class="form-control-group">
+    <label class="label" size="large">Groupe</label>
+    <!-- a changer le role par groupe -->
+    <input nbInput fullWidth value="{{user.role}}" fieldSize="large" >
+</div>
+
