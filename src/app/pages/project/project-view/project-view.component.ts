@@ -19,14 +19,8 @@ export class ProjectViewComponent implements OnInit {
               private groupService: GroupService) { }
 
   ngOnInit() {
-    this.getProject();
+    this.project = this.route.snapshot.data.group;
     this.getAllGroups();
-  }
-
-  getProject() {
-    this.projectService.getProject(this.route.snapshot.params.id).subscribe(data => {
-      this.project = data;
-    });
   }
 
   changeMode() {

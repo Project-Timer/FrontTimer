@@ -15,7 +15,6 @@ export class ProjectFormComponent implements OnInit {
   };
   private user;
   private groups;
-  private selectedValue = [];
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private projectService: ProjectService, private tokenService: NbTokenService,
@@ -31,12 +30,10 @@ export class ProjectFormComponent implements OnInit {
   }
 
   save() {
-    this.project.group = this.selectedValue.map((str) => ({group_id: str}));
     this.projectService.addProject(this.project).subscribe(
       res => {
         this.project.name = '';
         this.project.group = [];
-        this.selectedValue = [];
         this.someEvent.next('projects');
       },
       error => {

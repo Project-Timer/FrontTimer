@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
+import {Observable} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -24,12 +26,12 @@ export class ProjectService {
       });
   }
 
-  getAllProject() {
-    return this.http.get<any[]>(this.baseEndPoint + '/projects', this.httpOptions);
+  getAllProject(): Observable<any> {
+    return this.http.get<any[]>(this.baseEndPoint + '/projects', this.httpOptions).pipe(delay(100));
   }
 
-  getProject(id: number) {
-    return this.http.get<any>(this.baseEndPoint + '/project/' + id, this.httpOptions);
+  getProject(id: number): Observable<any> {
+    return this.http.get<any>(this.baseEndPoint + '/project/' + id, this.httpOptions).pipe(delay(100));
   }
 
   addProject(project: any) {
