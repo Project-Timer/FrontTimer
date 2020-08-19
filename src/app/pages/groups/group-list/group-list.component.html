@@ -6,10 +6,7 @@
 </h1>
 
 <ng-container *ngIf="show">
-  <input type="text" [(ngModel)]="group.name" class="mt-4" nbInput fieldSize="large" shape="semi-round" placeholder="Name">
-  <button class="ml-2" nbButton size="tiny" shape="semi-round" fieldSize="large" status="success" (click)="save();">
-    <nb-icon icon="save-outline"></nb-icon> Save
-  </button>
+  <ngx-group-form (someEvent)="getAllGroups()"></ngx-group-form>
 </ng-container>
 
 <ng-container *ngIf="groups.length > 0; then list else empty"></ng-container>
