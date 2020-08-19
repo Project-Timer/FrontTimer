@@ -27,7 +27,7 @@ export class GroupService {
   }
 
   getAllMembers() {
-    return this.http.get<any[]>(this.baseEndPoint + '/user', this.httpOptions);
+    return this.http.get<any[]>(this.baseEndPoint + '/users', this.httpOptions);
   }
 
   getAllGroups(): Observable<any> {

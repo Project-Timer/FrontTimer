@@ -13,11 +13,16 @@ export class GroupFormComponent implements OnInit {
     user: [],
   };
   private members;
+  private user;
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private groupService: GroupService, private tokenService: NbTokenService) { }
 
   ngOnInit() {
+    this.tokenService.get()
+      .subscribe((token: NbAuthJWTToken) => {
+        this.user = token.isValid() ? token.getPayload() : {};
+      });
     this.getMembers();
   }
 
@@ -37,6 +42,9 @@ export class GroupFormComponent implements OnInit {
   getMembers() {
     this.groupService.getAllMembers().subscribe(data => {
       this.members = data;
+      this.members = this.members.filter(obj => {
+        return obj._id !== this.user._id;
+      });
     });
   }
 }
