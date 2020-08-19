@@ -18,7 +18,7 @@ export class GroupViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getGroup();
+    this.group = this.route.snapshot.data.group;
     this.getAllMembers();
   }
 

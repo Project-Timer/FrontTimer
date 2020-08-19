@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
+import {Observable} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -25,15 +27,15 @@ export class GroupService {
   }
 
   getAllMembers() {
-    return this.http.get<any[]>(this.baseEndPoint + '/user', this.httpOptions);
+    return this.http.get<any[]>(this.baseEndPoint + '/users', this.httpOptions);
   }
 
-  getAllGroups() {
-    return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions);
+  getAllGroups(): Observable<any> {
+    return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions).pipe(delay(100));
   }
 
-  getGroup(id: number) {
-    return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions);
+  getGroup(id: number): Observable<any> {
+    return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions).pipe(delay(100));
   }
 
   addGroup(group: any) {
