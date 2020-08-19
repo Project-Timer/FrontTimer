@@ -12,7 +12,7 @@
   </button>
 </ng-container>
 
-<ng-container *ngIf="groups?.length > 0; then list else empty"></ng-container>
+<ng-container *ngIf="groups.length > 0; then list else empty"></ng-container>
 <ng-template #list>
   <div class="row mt-4">
     <div class="col-6" *ngFor="let group of groups">
