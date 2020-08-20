@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ProjectService} from '../project.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GroupService} from '../../groups/group.service';
@@ -14,12 +14,14 @@ export class ProjectViewComponent implements OnInit {
   private show = false;
   private groups;
   private selectedValue = [];
+  private errors = null;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router,
-              private groupService: GroupService) { }
+              private groupService: GroupService, private cr: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
-    this.project = this.route.snapshot.data.group;
+    this.project = this.route.snapshot.data.project;
     this.getAllGroups();
   }
 
@@ -28,9 +30,16 @@ export class ProjectViewComponent implements OnInit {
   }
 
   save() {
-    this.projectService.updateProject(this.project).subscribe(data => {
-      this.project = data;
-    });
+    this.projectService.updateProject(this.project).subscribe(
+      data => {
+        this.project = data;
+        this.errors = null;
+      },
+      error => {
+        this.errors = error.error.message;
+        this.cr.detectChanges();
+      },
+    );
   }
 
   delete() {
@@ -43,7 +52,7 @@ export class ProjectViewComponent implements OnInit {
 
   deleteGroup(group: any) {
     this.project.group = this.project.group.filter(obj => {
-      return group.group_id !== obj._id;
+      return group._id !== obj._id;
     });
     this.groups.push(group);
     this.save();
@@ -54,7 +63,7 @@ export class ProjectViewComponent implements OnInit {
       this.groups = data;
       for (const group of this.project.group) {
         this.groups = this.groups.filter(obj => {
-          return obj._id !== group._id;
+          return obj._id !== group.group_id;
         });
       }
     });

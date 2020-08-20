@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'view/:id',
     component: ProjectViewComponent,
     resolve: {
-      projects: SingleProjectResolve,
+      project: SingleProjectResolve,
     },
   },
 ];

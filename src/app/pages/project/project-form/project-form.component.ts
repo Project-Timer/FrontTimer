@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProjectService} from '../project.service';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 import {GroupService} from '../../groups/group.service';
@@ -15,10 +15,11 @@ export class ProjectFormComponent implements OnInit {
   };
   private user;
   private groups;
+  private errors = null;
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private projectService: ProjectService, private tokenService: NbTokenService,
-              private groupService: GroupService) {
+              private groupService: GroupService, private cr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -35,9 +36,11 @@ export class ProjectFormComponent implements OnInit {
         this.project.name = '';
         this.project.group = [];
         this.someEvent.next('projects');
+        this.errors = null;
       },
       error => {
-        /* TODO: ERRORS */
+        this.errors = error.error.message;
+        this.cr.detectChanges();
       },
     );
   }

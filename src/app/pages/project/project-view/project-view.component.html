@@ -9,10 +9,13 @@
     </button>
   </h1>
   <div *ngIf="editMode">
+    <nb-alert *ngIf="errors" status="danger" class="mt-2 mb-2 m-0">
+      {{ errors }}
+    </nb-alert>
     <input type="text" [(ngModel)]="project.name" nbInput fieldSize="large" shape="semi-round">
     <button class="ml-2" nbButton size="tiny" shape="semi-round" fieldSize="large" status="success"
             (click)="save(); editMode = false">
-      <nb-icon icon="edit-outline"></nb-icon>
+      <nb-icon icon="save-outline"></nb-icon> Save
     </button>
   </div>
 
@@ -25,7 +28,7 @@
 
   <ng-container *ngIf="show">
     <nb-select [(ngModel)]="selectedValue" multiple placeholder="Choose groups" shape="semi-round" class="search-input">
-      <nb-option *ngFor="let group of groups" value="{{ group.group_id }}">{{ group.name }}</nb-option>
+      <nb-option *ngFor="let group of groups" value="{{ group._id }}">{{ group.name }}</nb-option>
     </nb-select>
     <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="addGroup()">
       <nb-icon icon="checkmark-outline"></nb-icon>
