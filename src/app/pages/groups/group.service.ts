@@ -31,11 +31,11 @@ export class GroupService {
   }
 
   getAllGroups(): Observable<any> {
-    return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions).pipe(delay(100));
+    return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions);
   }
 
   getGroup(id: number): Observable<any> {
-    return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions).pipe(delay(100));
+    return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions);
   }
 
   addGroup(group: any) {

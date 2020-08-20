@@ -1,15 +1,24 @@
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {GroupService} from '../group.service';
+import {catchError, map} from 'rxjs/operators';
+import {NbToastrService} from '@nebular/theme';
 
 @Injectable()
 export class GroupsResolve implements Resolve<any> {
-  constructor(private groupService: GroupService) {
+  constructor(private groupService: GroupService, private router: Router, private toaster: NbToastrService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.groupService.getAllGroups();
+    return this.groupService.getAllGroups().pipe(
+      map(res => res),
+      catchError(() => {
+        this.toaster.danger('A server error has occured. Please try later!', 'Oops...', {'duration': 5000});
+        this.router.navigate(['/']);
+        return EMPTY;
+      }),
+    );
   }
 
 }
