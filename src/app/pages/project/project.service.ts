@@ -27,11 +27,11 @@ export class ProjectService {
   }
 
   getAllProject(): Observable<any> {
-    return this.http.get<any[]>(this.baseEndPoint + '/projects', this.httpOptions).pipe(delay(100));
+    return this.http.get<any[]>(this.baseEndPoint + '/projects', this.httpOptions);
   }
 
   getProject(id: number): Observable<any> {
-    return this.http.get<any>(this.baseEndPoint + '/project/' + id, this.httpOptions).pipe(delay(100));
+    return this.http.get<any>(this.baseEndPoint + '/project/' + id, this.httpOptions);
   }
 
   addProject(project: any) {
