@@ -1,3 +1,7 @@
+<nb-alert *ngIf="errors" status="danger" class="mt-2 mb-2 m-0">
+  {{ errors }}
+</nb-alert>
+
 <input type="text" [(ngModel)]="group.name" class="mt-4" nbInput fieldSize="large" shape="semi-round"
        placeholder="Name">
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ChangeDetectorRef} from '@angular/core';
 import {GroupService} from '../group.service';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 
@@ -14,9 +14,11 @@ export class GroupFormComponent implements OnInit {
   };
   private members;
   private user;
+  private errors = null;
   @Output() someEvent = new EventEmitter<string>();
 
-  constructor(private groupService: GroupService, private tokenService: NbTokenService) { }
+  constructor(private groupService: GroupService, private tokenService: NbTokenService,
+              private cr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.tokenService.get()
@@ -32,9 +34,11 @@ export class GroupFormComponent implements OnInit {
         this.group.name = '';
         this.group.user = [];
         this.someEvent.next('groups');
+        this.errors = null;
       },
       error => {
-        /* TODO: ERRORS */
+        this.errors = error.error.message;
+        this.cr.detectChanges();
       },
     );
   }

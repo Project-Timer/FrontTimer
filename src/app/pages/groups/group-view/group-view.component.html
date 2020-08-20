@@ -1,11 +1,13 @@
 <h1 class="m-0 groupName" *ngIf="!editMode">
   <span (click)="changeMode()">{{ group.name }}</span>
-  <button class="ml-2" nbButton size="tiny" shape="semi-round" status="primary" (click)="changeMode()">
-    <nb-icon icon="edit-outline"></nb-icon>
-  </button>
-  <button class="ml-2" nbButton size="tiny" shape="semi-round" status="danger" (click)="delete()">
-    <nb-icon icon="trash-2-outline"></nb-icon>
-  </button>
+  <ng-container *ngIf="getAdmin() === user._id">
+    <button class="ml-2" nbButton size="tiny" shape="semi-round" status="primary" (click)="changeMode()">
+      <nb-icon icon="edit-outline"></nb-icon>
+    </button>
+    <button class="ml-2" nbButton size="tiny" shape="semi-round" status="danger" (click)="delete()">
+      <nb-icon icon="trash-2-outline"></nb-icon>
+    </button>
+  </ng-container>
 </h1>
 <div *ngIf="editMode">
   <input type="text" [(ngModel)]="group.name" nbInput fieldSize="large" shape="semi-round">
@@ -17,7 +19,7 @@
 
 <div class="h4 mt-4">
   Members
-  <button nbButton size="tiny" shape="semi-round" status="basic" (click)="showFormMembers()">
+  <button nbButton size="tiny" shape="semi-round" status="basic" *ngIf="getAdmin() === user._id" (click)="showFormMembers()">
     {{ show === false ? 'Add new' : 'Close' }}
   </button>
 </div>
@@ -46,7 +48,7 @@
               {{ member.email }}
             </p>
           </div>
-          <div class="col-2" *ngIf="member.role !== 'admin'">
+          <div class="col-2" *ngIf="member.role !== 'admin' && getAdmin() === user._id">
             <button (click)="deleteMember(member)" class="ml-2" nbButton size="tiny" shape="semi-round" status="danger">
               <nb-icon icon="trash-2-outline"></nb-icon>
             </button>

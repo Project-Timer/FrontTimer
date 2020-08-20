@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {GroupService} from '../group.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 
 @Component({
   selector: 'ngx-group-view',
@@ -13,12 +14,19 @@ export class GroupViewComponent implements OnInit {
   private show = false;
   private members;
   private selectedValue = [];
+  private errors = null;
+  private user;
 
-  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router) {
+  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router,
+              private cr: ChangeDetectorRef, private tokenService: NbTokenService) {
   }
 
   ngOnInit() {
     this.group = this.route.snapshot.data.group;
+    this.tokenService.get()
+      .subscribe((token: NbAuthJWTToken) => {
+        this.user = token.isValid() ? token.getPayload() : {};
+      });
     this.getAllMembers();
   }
 
@@ -29,21 +37,34 @@ export class GroupViewComponent implements OnInit {
   }
 
   changeMode() {
-    this.editMode = !this.editMode;
+    if (this.getAdmin() === this.user._id) {
+      this.editMode = !this.editMode;
+    }
   }
 
   save() {
-    this.groupService.updateGroup(this.group).subscribe(data => {
-      this.group = data;
-    });
+    this.groupService.updateGroup(this.group).subscribe(
+      data => {
+        this.group = data;
+        this.errors = null;
+      },
+      error => {
+        this.errors = error.error.message;
+        this.cr.detectChanges();
+      },
+    );
   }
 
   delete() {
-    this.groupService.deleteGroup(this.group).subscribe(res => {
-      if (res.status === 200) {
+    this.groupService.deleteGroup(this.group).subscribe(
+      res => {
         this.router.navigate(['/pages/groups']);
-      }
-    });
+      },
+      error => {
+        this.errors = error.error.message;
+        this.cr.detectChanges();
+      },
+    );
   }
 
   deleteMember(member: any) {
@@ -83,5 +104,9 @@ export class GroupViewComponent implements OnInit {
     }
     this.selectedValue = [];
     this.save();
+  }
+
+  getAdmin() {
+    return this.groupService.getAdmin(this.group);
   }
 }
