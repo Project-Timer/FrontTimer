@@ -31,13 +31,14 @@ export class ProjectViewComponent implements OnInit {
 
   save() {
     const newProject = {...this.project};
-    const groupTab = [];
-    for (const groupValue of newProject.groups) {
-      groupTab.push(groupValue.group_id);
+    newProject.groups = [];
+    for (const groupValue of this.project.groups) {
+      newProject.groups.push(groupValue._id);
     }
-    newProject.groups = groupTab;
+    delete newProject.admin;
     this.projectService.updateProject(newProject).subscribe(
       data => {
+        this.toaster.success('Project successfully updated', 'Success', {'duration': 5000});
         this.project = data;
       },
       error => {
@@ -49,6 +50,7 @@ export class ProjectViewComponent implements OnInit {
   delete() {
     this.projectService.deleteProject(this.project).subscribe(
       res => {
+        this.toaster.success('Project successfully deleted', 'Success', {'duration': 5000});
         this.router.navigate(['/pages/project']);
       },
       error => {

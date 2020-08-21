@@ -8,7 +8,7 @@
         <button (click)="showGroups()" nbButton size="tiny" shape="semi-round" status="primary" class="mr-2">
           <nb-icon icon="people-outline"></nb-icon>
         </button>
-        <a [routerLink]="'view/'+[project._id]" *ngIf="project.admin[0].user_id === user._id">
+        <a [routerLink]="'view/'+[project._id]" *ngIf="project.admin.user_id === user._id">
           <button nbButton size="tiny" shape="semi-round" status="warning">
             <nb-icon icon="settings-outline"></nb-icon>
           </button>
