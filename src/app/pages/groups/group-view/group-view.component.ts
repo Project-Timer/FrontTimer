@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from '../group.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-group-view',
@@ -13,42 +15,59 @@ export class GroupViewComponent implements OnInit {
   private show = false;
   private members;
   private selectedValue = [];
+  private user;
 
-  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router) {
+  constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router,
+              private toaster: NbToastrService, private tokenService: NbTokenService) {
   }
 
   ngOnInit() {
     this.group = this.route.snapshot.data.group;
+    this.tokenService.get()
+      .subscribe((token: NbAuthJWTToken) => {
+        this.user = token.isValid() ? token.getPayload() : {};
+      });
     this.getAllMembers();
   }
 
-  getGroup() {
-    this.groupService.getGroup(this.route.snapshot.params.id).subscribe(data => {
-      this.group = data;
-    });
-  }
-
   changeMode() {
-    this.editMode = !this.editMode;
+    if (this.group.admin.user_id === this.user._id) {
+      this.editMode = !this.editMode;
+    }
   }
 
   save() {
-    this.groupService.updateGroup(this.group).subscribe(data => {
-      this.group = data;
-    });
+    const newGroup = {...this.group};
+    newGroup.users = [];
+    for (const groupUser of this.group.users) {
+      newGroup.users.push(groupUser.user_id);
+    }
+    this.groupService.updateGroup(newGroup).subscribe(
+      data => {
+        this.toaster.success('Group successfully updated', 'Success', {'duration': 5000});
+        this.group = data;
+      },
+      error => {
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
+      },
+    );
   }
 
   delete() {
-    this.groupService.deleteGroup(this.group).subscribe(res => {
-      if (res.status === 200) {
+    this.groupService.deleteGroup(this.group).subscribe(
+      res => {
+        this.toaster.success('Group successfully deleted', 'Success', {'duration': 5000});
         this.router.navigate(['/pages/groups']);
-      }
-    });
+      },
+      error => {
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
+      },
+    );
   }
 
   deleteMember(member: any) {
-    this.group.user = this.group.user.filter(obj => {
-      return member._id !== obj._id;
+    this.group.users = this.group.users.filter(obj => {
+      return member.user_id !== obj.user_id;
     });
     this.members.push(member);
     this.save();
@@ -61,7 +80,10 @@ export class GroupViewComponent implements OnInit {
   getAllMembers() {
     this.groupService.getAllMembers().subscribe(data => {
       this.members = data;
-      for (const member of this.group.user) {
+      this.members = this.members.filter(obj => {
+        return obj._id !== this.user._id;
+      });
+      for (const member of this.group.users) {
         this.members = this.members.filter(obj => {
           return obj._id !== member.user_id;
         });
@@ -76,7 +98,7 @@ export class GroupViewComponent implements OnInit {
       });
       user.role = 'user';
       user.user_id = user._id;
-      this.group.user.push(user);
+      this.group.users.push(user);
       this.members = this.members.filter(obj => {
         return obj._id !== value;
       });

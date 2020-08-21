@@ -31,15 +31,15 @@ export class GroupService {
   }
 
   getAllGroups(): Observable<any> {
-    return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions).pipe(delay(100));
+    return this.http.get<any[]>(this.baseEndPoint + '/groups', this.httpOptions);
   }
 
   getGroup(id: number): Observable<any> {
-    return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions).pipe(delay(100));
+    return this.http.get<any>(this.baseEndPoint + '/group/' + id, this.httpOptions);
   }
 
   addGroup(group: any) {
-    return this.http.post<any>(this.baseEndPoint + '/group/add', JSON.stringify(group), this.httpOptions);
+    return this.http.post<any>(this.baseEndPoint + '/group', JSON.stringify(group), this.httpOptions);
   }
 
   updateGroup(group: any) {
@@ -48,13 +48,5 @@ export class GroupService {
 
   deleteGroup(group: any) {
     return this.http.delete(this.baseEndPoint + '/group/' + group._id, {observe: 'response'});
-  }
-
-  getAdmin(group) {
-    for (const member of group.user) {
-      if (member.role === 'admin') {
-        return member.user_id;
-      }
-    }
   }
 }

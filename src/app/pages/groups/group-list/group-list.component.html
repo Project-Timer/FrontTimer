@@ -13,10 +13,10 @@
 <ng-template #list>
   <div class="row mt-4">
     <div class="col-6" *ngFor="let group of groups">
-      <ngx-group-box [group]="group"></ngx-group-box>
+      <ngx-group-box [group]="group" [user]="user"></ngx-group-box>
     </div>
   </div>
 </ng-template>
 <ng-template #empty>
-  <div class="h6">There are no groups</div>
+  <div class="h6 mt-4">There are no groups</div>
 </ng-template>
