@@ -5,7 +5,7 @@
       <nb-list>
         <nb-list-item *ngFor="let member of members">
           <p>
-            {{ member.lastname + ' ' + member.name }} <b>({{ member.role|titlecase }})</b>
+            {{ member.name|uppercase }} {{ member.lastname }}
           </p>
           <p>
             {{ member.email }}

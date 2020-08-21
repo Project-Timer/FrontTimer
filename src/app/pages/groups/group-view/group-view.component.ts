@@ -31,22 +31,20 @@ export class GroupViewComponent implements OnInit {
   }
 
   changeMode() {
-    if (this.getAdmin() === this.user._id) {
+    if (this.group.admin.user_id === this.user._id) {
       this.editMode = !this.editMode;
     }
   }
 
   save() {
     const newGroup = {...this.group};
-    const userTab = [];
-    for (const groupUser of newGroup.users) {
-      if (groupUser.role !== 'admin') {
-        userTab.push(groupUser._id);
-      }
+    newGroup.users = [];
+    for (const groupUser of this.group.users) {
+      newGroup.users.push(groupUser.user_id);
     }
-    newGroup.users = userTab;
     this.groupService.updateGroup(newGroup).subscribe(
       data => {
+        this.toaster.success('Group successfully updated', 'Success', {'duration': 5000});
         this.group = data;
       },
       error => {
@@ -58,6 +56,7 @@ export class GroupViewComponent implements OnInit {
   delete() {
     this.groupService.deleteGroup(this.group).subscribe(
       res => {
+        this.toaster.success('Group successfully deleted', 'Success', {'duration': 5000});
         this.router.navigate(['/pages/groups']);
       },
       error => {
@@ -68,7 +67,7 @@ export class GroupViewComponent implements OnInit {
 
   deleteMember(member: any) {
     this.group.users = this.group.users.filter(obj => {
-      return member._id !== obj._id;
+      return member.user_id !== obj.user_id;
     });
     this.members.push(member);
     this.save();
@@ -81,6 +80,9 @@ export class GroupViewComponent implements OnInit {
   getAllMembers() {
     this.groupService.getAllMembers().subscribe(data => {
       this.members = data;
+      this.members = this.members.filter(obj => {
+        return obj._id !== this.user._id;
+      });
       for (const member of this.group.users) {
         this.members = this.members.filter(obj => {
           return obj._id !== member.user_id;
@@ -103,9 +105,5 @@ export class GroupViewComponent implements OnInit {
     }
     this.selectedValue = [];
     this.save();
-  }
-
-  getAdmin() {
-    return this.groupService.getAdmin(this.group);
   }
 }

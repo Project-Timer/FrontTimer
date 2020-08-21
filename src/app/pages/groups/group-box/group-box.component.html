@@ -8,10 +8,18 @@
         <button (click)="showMembers()" nbButton size="tiny" shape="semi-round" status="primary" class="mr-2">
           <nb-icon icon="people-outline"></nb-icon>
         </button>
-        <a [routerLink]="'view/'+[group._id]" *ngIf="getAdmin(group) === user._id">
-          <button nbButton size="tiny" shape="semi-round" status="warning">
-            <nb-icon icon="settings-outline"></nb-icon>
-          </button>
+        <a [routerLink]="'view/'+[group._id]">
+          <ng-container *ngIf="group.admin.user_id === user._id; then settings else eye"></ng-container>
+          <ng-template #settings>
+            <button nbButton size="tiny" shape="semi-round" status="warning">
+              <nb-icon icon="settings-outline"></nb-icon>
+            </button>
+          </ng-template>
+          <ng-template #eye>
+            <button nbButton size="tiny" shape="semi-round" status="info">
+              <nb-icon icon="eye-outline"></nb-icon>
+            </button>
+          </ng-template>
         </a>
       </div>
     </div>

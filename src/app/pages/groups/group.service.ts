@@ -49,12 +49,4 @@ export class GroupService {
   deleteGroup(group: any) {
     return this.http.delete(this.baseEndPoint + '/group/' + group._id, {observe: 'response'});
   }
-
-  getAdmin(group) {
-    for (const member of group.users) {
-      if (member.role === 'admin') {
-        return member.user_id;
-      }
-    }
-  }
 }
