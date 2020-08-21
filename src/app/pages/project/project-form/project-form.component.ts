@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProjectService} from '../project.service';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 import {GroupService} from '../../groups/group.service';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-project-form',
@@ -11,15 +12,14 @@ import {GroupService} from '../../groups/group.service';
 export class ProjectFormComponent implements OnInit {
   private project = {
     name: '',
-    group: [],
+    groups: [],
   };
   private user;
   private groups;
-  private errors = null;
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private projectService: ProjectService, private tokenService: NbTokenService,
-              private groupService: GroupService, private cr: ChangeDetectorRef) {
+              private groupService: GroupService, private toaster: NbToastrService) {
   }
 
   ngOnInit() {
@@ -34,13 +34,11 @@ export class ProjectFormComponent implements OnInit {
     this.projectService.addProject(this.project).subscribe(
       res => {
         this.project.name = '';
-        this.project.group = [];
+        this.project.groups = [];
         this.someEvent.next('projects');
-        this.errors = null;
       },
       error => {
-        this.errors = error.error.message;
-        this.cr.detectChanges();
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
       },
     );
   }

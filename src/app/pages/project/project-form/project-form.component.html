@@ -1,11 +1,7 @@
-<nb-alert *ngIf="errors" status="danger" class="mt-2 mb-2 m-0">
-  {{ errors }}
-</nb-alert>
-
 <input type="text" [(ngModel)]="project.name" class="mt-2" nbInput fieldSize="large" shape="semi-round"
        placeholder="Name">
 
-<nb-select [(ngModel)]="project.group" multiple placeholder="Choose group" fieldSize="large" shape="semi-round"
+<nb-select [(ngModel)]="project.groups" multiple placeholder="Choose group" fieldSize="large" shape="semi-round"
            class="ml-2 search-input">
   <nb-option *ngFor="let group of groups" value="{{ group._id }}">{{ group.name }}</nb-option>
 </nb-select>

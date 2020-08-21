@@ -35,7 +35,7 @@ export class ProjectService {
   }
 
   addProject(project: any) {
-    return this.http.post<any>(this.baseEndPoint + '/project/add', JSON.stringify(project), this.httpOptions);
+    return this.http.post<any>(this.baseEndPoint + '/project', JSON.stringify(project), this.httpOptions);
   }
 
   updateProject(project: any) {

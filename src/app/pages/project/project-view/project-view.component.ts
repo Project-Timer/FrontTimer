@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProjectService} from '../project.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GroupService} from '../../groups/group.service';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-project-view',
@@ -14,10 +15,9 @@ export class ProjectViewComponent implements OnInit {
   private show = false;
   private groups;
   private selectedValue = [];
-  private errors = null;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router,
-              private groupService: GroupService, private cr: ChangeDetectorRef) {
+              private groupService: GroupService, private toaster: NbToastrService) {
   }
 
   ngOnInit() {
@@ -30,28 +30,35 @@ export class ProjectViewComponent implements OnInit {
   }
 
   save() {
-    this.projectService.updateProject(this.project).subscribe(
+    const newProject = {...this.project};
+    const groupTab = [];
+    for (const groupValue of newProject.groups) {
+      groupTab.push(groupValue.group_id);
+    }
+    newProject.groups = groupTab;
+    this.projectService.updateProject(newProject).subscribe(
       data => {
         this.project = data;
-        this.errors = null;
       },
       error => {
-        this.errors = error.error.message;
-        this.cr.detectChanges();
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
       },
     );
   }
 
   delete() {
-    this.projectService.deleteProject(this.project).subscribe(res => {
-      if (res.status === 200) {
+    this.projectService.deleteProject(this.project).subscribe(
+      res => {
         this.router.navigate(['/pages/project']);
-      }
-    });
+      },
+      error => {
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
+      },
+    );
   }
 
   deleteGroup(group: any) {
-    this.project.group = this.project.group.filter(obj => {
+    this.project.groups = this.project.groups.filter(obj => {
       return group._id !== obj._id;
     });
     this.groups.push(group);
@@ -61,7 +68,7 @@ export class ProjectViewComponent implements OnInit {
   getAllGroups() {
     this.groupService.getAllGroups().subscribe(data => {
       this.groups = data;
-      for (const group of this.project.group) {
+      for (const group of this.project.groups) {
         this.groups = this.groups.filter(obj => {
           return obj._id !== group.group_id;
         });
@@ -78,7 +85,7 @@ export class ProjectViewComponent implements OnInit {
       const group = this.groups.find(obj => {
         return obj._id === value;
       });
-      this.project.group.push(group);
+      this.project.groups.push(group);
       this.groups = this.groups.filter(obj => {
         return obj._id !== value;
       });
