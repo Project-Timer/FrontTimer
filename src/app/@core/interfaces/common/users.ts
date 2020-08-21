@@ -13,7 +13,7 @@ export interface Address {
 }
 
 export abstract class UserData {
-  abstract getCurrentUser(): Observable<User>;
+  abstract getCurrent(id): Observable<any>;
   abstract get(id: number): Observable<User>;
   abstract update(user: any): Observable<any>;
   abstract updateCurrent(updatedUser: User): Observable<User>;

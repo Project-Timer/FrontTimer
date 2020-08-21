@@ -7,8 +7,8 @@ import { environment } from '../../../../../environments/environment';
 export class HttpService {
 
   get apiUrl(): string {
-    // return environment.apiUrl;
-    return '';
+    return environment.apiUrl;
+    // return '';
   }
 
   constructor(private http: HttpClient) {}

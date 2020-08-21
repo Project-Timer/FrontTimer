@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NbTokenService, NbAuthJWTToken } from '@nebular/auth';
 import { takeWhile } from 'rxjs/operators';
 import { UserData, User } from '../../../@core/interfaces/common/users';
+import { UsersService } from '../../../@core/backend/common/services/users.service';
 
 @Component({
   selector: 'ngx-profile',
@@ -13,7 +14,7 @@ export class NgxProfileComponent {
   user: any
   constructor(
     private tokenService: NbTokenService,
-    private userService: UserData
+    private userService: UsersService
   ) { }
 
 
@@ -24,8 +25,13 @@ export class NgxProfileComponent {
       .pipe(takeWhile(() => this.alive))
       .subscribe((token: NbAuthJWTToken) => {
         this.user = token.isValid() ? token.getPayload() : {}
-        console.log(this.user)
+        // console.log(token.getPayload()._id)
+        this.userService.getCurrent(token.getPayload()._id).subscribe(data=>{
+          console.log(data)
+        }
+          )
       });
+
 
   }
   submitUpdate() {

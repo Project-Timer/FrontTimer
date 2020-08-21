@@ -10,8 +10,8 @@ export class UsersService extends UserData {
     super();
   }
 
-  getCurrentUser(): Observable<User> {
-    return this.api.getCurrent();
+  getCurrent(id): Observable<any> {
+    return this.api.getCurrent(id);
   }
 
   get(id: number): Observable<User> {

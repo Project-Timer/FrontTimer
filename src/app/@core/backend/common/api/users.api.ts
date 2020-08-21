@@ -5,12 +5,13 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UsersApi {
-  private readonly apiController: string = 'users';
+  private readonly apiController: string = 'user';
 
   constructor(private api: HttpService) {}
 
-  getCurrent(): Observable<any> {
-    return this.api.get(`${this.apiController}/current`)
+  getCurrent(id): Observable<any> {
+    console.log(id)
+    return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
         return data
       }));
