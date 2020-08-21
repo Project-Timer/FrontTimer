@@ -33,7 +33,7 @@ export class ProjectViewComponent implements OnInit {
     const newProject = {...this.project};
     newProject.groups = [];
     for (const groupValue of this.project.groups) {
-      newProject.groups.push(groupValue._id);
+      newProject.groups.push(groupValue.group_id);
     }
     delete newProject.admin;
     this.projectService.updateProject(newProject).subscribe(
@@ -61,7 +61,7 @@ export class ProjectViewComponent implements OnInit {
 
   deleteGroup(group: any) {
     this.project.groups = this.project.groups.filter(obj => {
-      return group._id !== obj._id;
+      return group.group_id !== obj.group_id;
     });
     this.groups.push(group);
     this.save();
@@ -87,6 +87,7 @@ export class ProjectViewComponent implements OnInit {
       const group = this.groups.find(obj => {
         return obj._id === value;
       });
+      group.group_id = group._id;
       this.project.groups.push(group);
       this.groups = this.groups.filter(obj => {
         return obj._id !== value;
