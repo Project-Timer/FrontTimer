@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GroupService} from '../group.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-group-view',
@@ -14,11 +15,10 @@ export class GroupViewComponent implements OnInit {
   private show = false;
   private members;
   private selectedValue = [];
-  private errors = null;
   private user;
 
   constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router,
-              private cr: ChangeDetectorRef, private tokenService: NbTokenService) {
+              private toaster: NbToastrService, private tokenService: NbTokenService) {
   }
 
   ngOnInit() {
@@ -30,12 +30,6 @@ export class GroupViewComponent implements OnInit {
     this.getAllMembers();
   }
 
-  getGroup() {
-    this.groupService.getGroup(this.route.snapshot.params.id).subscribe(data => {
-      this.group = data;
-    });
-  }
-
   changeMode() {
     if (this.getAdmin() === this.user._id) {
       this.editMode = !this.editMode;
@@ -43,14 +37,20 @@ export class GroupViewComponent implements OnInit {
   }
 
   save() {
-    this.groupService.updateGroup(this.group).subscribe(
+    const newGroup = {...this.group};
+    const userTab = [];
+    for (const groupUser of newGroup.users) {
+      if (groupUser.role !== 'admin') {
+        userTab.push(groupUser._id);
+      }
+    }
+    newGroup.users = userTab;
+    this.groupService.updateGroup(newGroup).subscribe(
       data => {
         this.group = data;
-        this.errors = null;
       },
       error => {
-        this.errors = error.error.message;
-        this.cr.detectChanges();
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
       },
     );
   }
@@ -61,14 +61,13 @@ export class GroupViewComponent implements OnInit {
         this.router.navigate(['/pages/groups']);
       },
       error => {
-        this.errors = error.error.message;
-        this.cr.detectChanges();
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
       },
     );
   }
 
   deleteMember(member: any) {
-    this.group.user = this.group.user.filter(obj => {
+    this.group.users = this.group.users.filter(obj => {
       return member._id !== obj._id;
     });
     this.members.push(member);
@@ -82,7 +81,7 @@ export class GroupViewComponent implements OnInit {
   getAllMembers() {
     this.groupService.getAllMembers().subscribe(data => {
       this.members = data;
-      for (const member of this.group.user) {
+      for (const member of this.group.users) {
         this.members = this.members.filter(obj => {
           return obj._id !== member.user_id;
         });
@@ -97,7 +96,7 @@ export class GroupViewComponent implements OnInit {
       });
       user.role = 'user';
       user.user_id = user._id;
-      this.group.user.push(user);
+      this.group.users.push(user);
       this.members = this.members.filter(obj => {
         return obj._id !== value;
       });

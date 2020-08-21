@@ -39,7 +39,7 @@ export class GroupService {
   }
 
   addGroup(group: any) {
-    return this.http.post<any>(this.baseEndPoint + '/group/add', JSON.stringify(group), this.httpOptions);
+    return this.http.post<any>(this.baseEndPoint + '/group', JSON.stringify(group), this.httpOptions);
   }
 
   updateGroup(group: any) {
@@ -51,7 +51,7 @@ export class GroupService {
   }
 
   getAdmin(group) {
-    for (const member of group.user) {
+    for (const member of group.users) {
       if (member.role === 'admin') {
         return member.user_id;
       }

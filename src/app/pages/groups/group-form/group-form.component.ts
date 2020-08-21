@@ -1,6 +1,7 @@
-import {Component, EventEmitter, OnInit, Output, ChangeDetectorRef} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {GroupService} from '../group.service';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-group-form',
@@ -10,15 +11,14 @@ import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 export class GroupFormComponent implements OnInit {
   private group = {
     name: '',
-    user: [],
+    users: [],
   };
   private members;
   private user;
-  private errors = null;
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private groupService: GroupService, private tokenService: NbTokenService,
-              private cr: ChangeDetectorRef) { }
+              private toaster: NbToastrService) { }
 
   ngOnInit() {
     this.tokenService.get()
@@ -32,13 +32,11 @@ export class GroupFormComponent implements OnInit {
     this.groupService.addGroup(this.group).subscribe(
       res => {
         this.group.name = '';
-        this.group.user = [];
+        this.group.users = [];
         this.someEvent.next('groups');
-        this.errors = null;
       },
       error => {
-        this.errors = error.error.message;
-        this.cr.detectChanges();
+        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
       },
     );
   }

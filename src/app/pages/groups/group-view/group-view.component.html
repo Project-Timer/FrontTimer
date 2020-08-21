@@ -34,10 +34,10 @@
   </button>
 </ng-container>
 
-<ng-container *ngIf="group.user.length > 0; then list else empty"></ng-container>
+<ng-container *ngIf="group.users.length > 0; then list else empty"></ng-container>
 <ng-template #list>
   <div class="row mt-4">
-    <div class="col-6" *ngFor="let member of group.user">
+    <div class="col-6" *ngFor="let member of group.users">
       <nb-card class="member">
         <div class="row">
           <div class="col-10">

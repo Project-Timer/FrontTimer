@@ -1,11 +1,7 @@
-<nb-alert *ngIf="errors" status="danger" class="mt-2 mb-2 m-0">
-  {{ errors }}
-</nb-alert>
-
-<input type="text" [(ngModel)]="group.name" class="mt-4" nbInput fieldSize="large" shape="semi-round"
+<input type="text" [(ngModel)]="group.name" class="mt-2" nbInput fieldSize="large" shape="semi-round"
        placeholder="Name">
 
-<nb-select [(ngModel)]="group.user" multiple placeholder="Choose members" fieldSize="large" shape="semi-round"
+<nb-select [(ngModel)]="group.users" multiple placeholder="Choose members" fieldSize="large" shape="semi-round"
            class="ml-2 search-input">
   <nb-option *ngFor="let member of members" value="{{ member._id }}">{{ member.name + ' ' + member.lastname }}</nb-option>
 </nb-select>
