@@ -27,7 +27,8 @@ export class NgxProfileComponent {
         this.user = token.isValid() ? token.getPayload() : {}
         // console.log(token.getPayload()._id)
         this.userService.getCurrent(token.getPayload()._id).subscribe(data=>{
-          console.log(data)
+          // console.log(data)
+          return this.user = data
         }
           )
       });

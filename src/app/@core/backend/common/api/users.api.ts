@@ -10,7 +10,7 @@ export class UsersApi {
   constructor(private api: HttpService) {}
 
   getCurrent(id): Observable<any> {
-    console.log(id)
+    // console.log(id)
     return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
         return data
