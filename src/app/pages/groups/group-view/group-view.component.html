@@ -2,7 +2,7 @@
   <div class="col-7">
     <h1 class="m-0 groupName" *ngIf="!editMode">
       <span (click)="changeMode()">{{ group.name }}</span>
-      <ng-container *ngIf="group.admin.user_id === user._id">
+      <ng-container *ngIf="group.admin._id === user._id">
         <button class="ml-2" nbButton size="tiny" shape="semi-round" status="primary" (click)="changeMode()">
           <nb-icon icon="edit-outline"></nb-icon>
         </button>
@@ -26,7 +26,7 @@
         Administrator of the group
       </b>
       <p>
-        {{ group.admin.name|uppercase }} {{ group.admin.lastname }}
+        {{ group.admin.name|uppercase }} {{ group.admin.lastName }}
         <small>({{ group.admin.email }})</small>
       </p>
     </nb-card>
@@ -35,7 +35,7 @@
 
 <div class="h4 mt-4">
   Members
-  <button nbButton size="tiny" shape="semi-round" status="basic" *ngIf="group.admin.user_id === user._id"
+  <button nbButton size="tiny" shape="semi-round" status="basic" *ngIf="group.admin._id === user._id"
           (click)="showFormMembers()">
     {{ show === false ? 'Add new' : 'Close' }}
   </button>
@@ -44,7 +44,7 @@
 <ng-container *ngIf="show">
   <nb-select [(ngModel)]="selectedValue" multiple placeholder="Choose members" shape="semi-round" class="search-input">
     <nb-option *ngFor="let member of members"
-               value="{{ member._id }}">{{ member.name|uppercase }} {{ member.lastname }}</nb-option>
+               value="{{ member._id }}">{{ member.firstName|uppercase }} {{ member.lastName }}</nb-option>
   </nb-select>
   <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="addUser()">
     <nb-icon icon="checkmark-outline"></nb-icon>
@@ -59,13 +59,13 @@
         <div class="row">
           <div class="col-10">
             <p>
-              {{ member.name|uppercase }} {{ member.lastname }}
+              {{ member.firstName|uppercase }} {{ member.lastName }}
             </p>
             <p>
               {{ member.email }}
             </p>
           </div>
-          <div class="col-2" *ngIf="group.admin.user_id === user._id">
+          <div class="col-2" *ngIf="group.admin._id === user._id">
             <button (click)="deleteMember(member)" class="ml-2" nbButton size="tiny" shape="semi-round" status="danger">
               <nb-icon icon="trash-2-outline"></nb-icon>
             </button>

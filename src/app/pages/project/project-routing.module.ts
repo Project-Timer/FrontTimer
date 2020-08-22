@@ -4,6 +4,7 @@ import {ProjectListComponent} from './project-list/project-list.component';
 import {ProjectViewComponent} from './project-view/project-view.component';
 import {ProjectsResolve} from './project-list/projects.resolve';
 import {SingleProjectResolve} from './project-view/single-project.resolve';
+import {TimerResolve} from './project-list/timer.resolve';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: ProjectListComponent,
     resolve: {
       projects: ProjectsResolve,
+      timer: TimerResolve,
     },
   },
   {
@@ -28,6 +30,7 @@ const routes: Routes = [
   providers: [
     ProjectsResolve,
     SingleProjectResolve,
+    TimerResolve,
   ],
 })
 export class ProjectRoutingModule {

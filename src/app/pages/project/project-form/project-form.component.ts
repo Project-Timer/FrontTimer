@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ProjectService} from '../project.service';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 import {GroupService} from '../../groups/group.service';
@@ -14,7 +14,7 @@ export class ProjectFormComponent implements OnInit {
     name: '',
     groups: [],
   };
-  private user;
+  @Input() user;
   private groups;
   @Output() someEvent = new EventEmitter<string>();
 
@@ -23,10 +23,6 @@ export class ProjectFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tokenService.get()
-      .subscribe((token: NbAuthJWTToken) => {
-        this.user = token.isValid() ? token.getPayload() : {};
-      });
     this.getGroups();
   }
 

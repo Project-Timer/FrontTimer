@@ -9,7 +9,7 @@
           <nb-icon icon="people-outline"></nb-icon>
         </button>
         <a [routerLink]="'view/'+[group._id]">
-          <ng-container *ngIf="group.admin.user_id === user._id; then settings else eye"></ng-container>
+          <ng-container *ngIf="group.admin._id === user._id; then settings else eye"></ng-container>
           <ng-template #settings>
             <button nbButton size="tiny" shape="semi-round" status="warning">
               <nb-icon icon="settings-outline"></nb-icon>
