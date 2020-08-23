@@ -24,7 +24,10 @@ export class UsersApi {
         return { ...data, picture };
       }));
   }
-
+  updateCurrent(user: any): Observable<any> {
+    return this.api.put(`${this.apiController}/${user.id}`, user);
+  }
+  
   delete(id: number): Observable<boolean> {
     return this.api.delete(`${this.apiController}/${id}`);
   }
@@ -33,11 +36,9 @@ export class UsersApi {
     return this.api.post(this.apiController, item);
   }
 
-  updateCurrent(item: any): Observable<any> {
-    return this.api.put(`${this.apiController}/current`, item);
-  }
+  // updateCurrent(item: any): Observable<any> {
+  //   return this.api.put(`${this.apiController}`, item);
+  // }
 
-  update(user: any): Observable<any> {
-    return this.api.put(`${this.apiController}/${user.id}`, user);
-  }
+  
 }
