@@ -22,7 +22,7 @@ export class NgxRegisterComponent extends NbRegisterComponent {
   ngOnInit(){
   }
   inscription(lastname, name, email, password) {
-    this.service.register('email', {lastname: lastname, name: name, email: email, password: password }).subscribe(res => {
+    this.service.register('email', {lastName: lastname, firstName: name, email: email, password: password }).subscribe(res => {
       this.toasterService.success(`l'utilisateur ${name + " " + lastname} a été enregistré avec succes.`, `Opération Réussie`, { duration: 3500 });
     }
     ), err => {
