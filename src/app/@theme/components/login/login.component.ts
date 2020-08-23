@@ -12,14 +12,14 @@ export class NgxLoginComponent extends NbLoginComponent {
   // }
   showPassword = true;
 
-  getInputType() {
-    if (this.showPassword) {
-      return 'text';
-    }
-    return 'password';
-  }
+  // getInputType() {
+  //   if (this.showPassword) {
+  //     return 'text';
+  //   }
+  //   return 'password';
+  // }
 
-  toggleShowPassword() {
-    this.showPassword = !this.showPassword;
-  }
+  // toggleShowPassword() {
+  //   this.showPassword = !this.showPassword;
+  // }
 }
