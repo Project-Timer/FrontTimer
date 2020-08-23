@@ -7,7 +7,7 @@
         <nb-icon icon="edit-2-outline"></nb-icon>
     </button>
 
-    <button nbButton *ngIf="showFields" nbTooltip="Switch to Read Mode" nbTooltipStatus="primary" status="info"
+    <button nbButton *ngIf="showFields" nbTooltip="Switch to View Mode" nbTooltipStatus="primary" status="info"
         type="submit" (click)="switchModeEdit()" size="small">
         <nb-icon icon="book-open-outline"></nb-icon>
     </button>
@@ -62,9 +62,9 @@
         Update Profile
     </button>
 
-    <button nbButton class="offset-3 col-4 " nbTooltip="Delete your account" nbTooltipStatus="primary" status="danger"
+    <button nbButton class="offset-3 col-4 " status="danger"
         (click)="submitDelete()">
         Delete Account
     </button>
-    
+
 </div>
