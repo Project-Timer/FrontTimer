@@ -20,8 +20,7 @@ export class UsersApi {
   get(id: number): Observable<any> {
     return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
-        const picture = `${this.api.apiBase}/${this.apiController}/${data.id}/photo`;
-        return { ...data, picture };
+        return { ...data};
       }));
   }
   updateCurrent(user: any): Observable<any> {
