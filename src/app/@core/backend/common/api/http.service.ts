@@ -6,26 +6,26 @@ import { environment } from '../../../../../environments/environment';
 @Injectable()
 export class HttpService {
 
-  get apiUrl(): string {
-    return environment.apiUrl;
+  get apiBase(): string {
+    return environment.apiBase;
     // return '';
   }
 
   constructor(private http: HttpClient) {}
 
   get(endpoint: string, options?): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${endpoint}`, options);
+    return this.http.get(`${this.apiBase}/${endpoint}`, options);
   }
 
   post(endpoint: string, data, options?): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${endpoint}`, data, options);
+    return this.http.post(`${this.apiBase}/${endpoint}`, data, options);
   }
 
   put(endpoint: string, data, options?): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${endpoint}`, data, options);
+    return this.http.put(`${this.apiBase}/${endpoint}`, data, options);
   }
 
   delete(endpoint: string, options?): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${endpoint}`, options);
+    return this.http.delete(`${this.apiBase}/${endpoint}`, options);
   }
 }
