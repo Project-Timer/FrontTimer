@@ -31,7 +31,7 @@ export class GroupViewComponent implements OnInit {
   }
 
   changeMode() {
-    if (this.group.admin.user_id === this.user._id) {
+    if (this.group.admin._id === this.user._id) {
       this.editMode = !this.editMode;
     }
   }
@@ -40,7 +40,7 @@ export class GroupViewComponent implements OnInit {
     const newGroup = {...this.group};
     newGroup.users = [];
     for (const groupUser of this.group.users) {
-      newGroup.users.push(groupUser.user_id);
+      newGroup.users.push(groupUser._id);
     }
     this.groupService.updateGroup(newGroup).subscribe(
       data => {
@@ -67,7 +67,7 @@ export class GroupViewComponent implements OnInit {
 
   deleteMember(member: any) {
     this.group.users = this.group.users.filter(obj => {
-      return member.user_id !== obj.user_id;
+      return member._id !== obj._id;
     });
     this.members.push(member);
     this.save();
@@ -85,7 +85,7 @@ export class GroupViewComponent implements OnInit {
       });
       for (const member of this.group.users) {
         this.members = this.members.filter(obj => {
-          return obj._id !== member.user_id;
+          return obj._id !== member._id;
         });
       }
     });
@@ -97,7 +97,6 @@ export class GroupViewComponent implements OnInit {
         return obj._id === value;
       });
       user.role = 'user';
-      user.user_id = user._id;
       this.group.users.push(user);
       this.members = this.members.filter(obj => {
         return obj._id !== value;

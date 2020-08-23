@@ -1,0 +1,32 @@
+@import '~app/@theme/styles/themes';
+
+@include nb-install-component() {
+
+  table {
+    border-collapse: collapse;
+    border: 1px solid #eee;
+    border-bottom: 2px solid nb-theme(color-primary-600);
+    border-radius: 0.5em;
+    overflow: hidden;
+    width: 100%;
+
+    th, td {
+      background: nb-theme(background-basic-color-2);
+      color: nb-theme(color-basic-600);
+      border: 1px solid #eee;
+      padding: 12px 35px;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: nb-theme(color-primary-600);
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 12px;
+
+      &.last {
+        border-right: none;
+      }
+    }
+  }
+}

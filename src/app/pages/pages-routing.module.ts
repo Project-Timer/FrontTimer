@@ -29,6 +29,11 @@ const routes: Routes = [{
     },
 
     {
+      path: 'timer',
+      loadChildren: './timer/timer.module#TimerModule',
+    },
+
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

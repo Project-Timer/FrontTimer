@@ -31,6 +31,19 @@ export class PagesMenu {
 
         ],
       },
+      {
+        title: 'TIMER',
+        icon: 'clock-outline',
+        expanded: true,
+        children: [
+          {
+            title: 'MY TIMERS',
+            link: '/pages/timer',
+            icon: 'person-outline',
+          },
+
+        ],
+      },
 
     ];
     return observableOf([...dashboardMenu/* , ...menu */]);

@@ -9,17 +9,18 @@ import {
   NbIconModule,
   NbInputModule,
   NbListModule,
-  NbSelectModule,
+  NbSelectModule, NbTooltipModule,
 } from '@nebular/theme';
 import {FormsModule} from '@angular/forms';
 import {ProjectFormComponent} from './project-form/project-form.component';
 import {GroupListComponent} from './group-list/group-list.component';
 import {ProjectBoxComponent} from './project-box/project-box.component';
-import { ProjectViewComponent } from './project-view/project-view.component';
+import {ProjectViewComponent} from './project-view/project-view.component';
 
 
 @NgModule({
-  declarations: [ProjectListComponent, ProjectFormComponent, GroupListComponent, ProjectBoxComponent, ProjectViewComponent],
+  declarations: [ProjectListComponent, ProjectFormComponent, GroupListComponent, ProjectBoxComponent,
+    ProjectViewComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,
@@ -31,6 +32,7 @@ import { ProjectViewComponent } from './project-view/project-view.component';
     NbSelectModule,
     NbAlertModule,
     NbListModule,
+    NbTooltipModule,
   ],
 })
 export class ProjectModule {

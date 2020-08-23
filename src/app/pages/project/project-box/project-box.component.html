@@ -1,18 +1,33 @@
 <nb-card>
   <nb-card-header>
-    <div class="cardHeader">
-      <div class="d-inline-block text-left w-75">
-        {{ project.name }} - <small>Created on {{ project.dateCreate|date:'mediumDate' }}</small>
+    <div class="cardHeader row">
+      <div class="text-left col-7">
+        {{ project.name }}
+        <p class="m-0"><small>Created on {{ project.dateCreate|date:'mediumDate' }}</small></p>
+        <p class="m-0">
+          <small>
+            <b>Working time on the project</b><br>
+            {{ globalTime }}
+          </small>
+        </p>
       </div>
-      <div class="d-inline-block text-right w-25">
+      <div class="text-right col-5">
         <button (click)="showGroups()" nbButton size="tiny" shape="semi-round" status="primary" class="mr-2">
           <nb-icon icon="people-outline"></nb-icon>
         </button>
-        <a [routerLink]="'view/'+[project._id]" *ngIf="project.admin.user_id === user._id">
-          <button nbButton size="tiny" shape="semi-round" status="warning">
+        <a [routerLink]="'view/'+[project._id]" *ngIf="project.admin._id === user._id">
+          <button nbButton size="tiny" shape="semi-round" status="warning" class="mr-2">
             <nb-icon icon="settings-outline"></nb-icon>
           </button>
         </a>
+        <button nbButton size="tiny" shape="semi-round" status="info" *ngIf="showBtnTimer && interval == null"
+                (click)="changeTimerStatus()">
+          <nb-icon icon="play-circle-outline"></nb-icon>
+        </button>
+        <button nbButton size="tiny" shape="semi-round" status="danger" *ngIf="showBtnTimer && interval != null"
+                (click)="changeTimerStatus()" nbTooltip="{{ tooltipMessage }}" nbTooltipPlacement="bottom">
+          <nb-icon icon="stop-circle-outline"></nb-icon>
+        </button>
       </div>
     </div>
   </nb-card-header>
