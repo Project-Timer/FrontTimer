@@ -34,6 +34,10 @@ export class TimerService {
     return this.http.get<any[]>(this.baseEndPoint + '/timers/user/' + id, this.httpOptions);
   }
 
+  getTimersByProject(id: number): Observable<any> {
+    return this.http.get<any[]>(this.baseEndPoint + '/timers/project/' + id, this.httpOptions);
+  }
+
   delete(id: number) {
     return this.http.delete(this.baseEndPoint + '/timer/' + id, {observe: 'response'});
   }

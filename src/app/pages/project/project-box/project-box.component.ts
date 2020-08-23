@@ -23,6 +23,7 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
   private showBtnTimer = false;
   private tooltipMessage = null;
   private interval = null;
+  private globalTime = null;
   @Input() user;
   @Input() timer = null;
   @Input() project: any;
@@ -84,16 +85,8 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
       const newDate = new Date();
       const newStamp = newDate.getTime();
 
-      let diff = Math.round((newStamp - startStamp) / 1000);
-
-      const d = Math.floor(diff / (24 * 60 * 60));
-      diff = diff - (d * 24 * 60 * 60);
-      const h = Math.floor(diff / (60 * 60));
-      diff = diff - (h * 60 * 60);
-      const m = Math.floor(diff / (60));
-      diff = diff - (m * 60);
-      const s = diff;
-      this.tooltipMessage = d + ' day(s), ' + h + ' hour(s), ' + m + ' minute(s), ' + s + ' second(s) working';
+      const diff = Math.round((newStamp - startStamp) / 1000);
+      this.tooltipMessage = this.getMessage(diff) + ' working';
 
       if (!this.cr['destroyed']) {
         this.cr.detectChanges();
@@ -113,5 +106,30 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
     } else {
       this.checkMemberIn();
     }
+    this.timerService.getTimersByProject(this.project._id).subscribe(
+      data => {
+        let time = 0;
+        for (const counter of data) {
+          const dateOne = new Date(counter.dateStart).getTime();
+          const dateTwo = new Date(counter.dateEnd).getTime();
+          if (dateOne && dateTwo) {
+            const diff = Math.round((dateTwo - dateOne) / 1000);
+            time += diff;
+          }
+        }
+        this.globalTime = this.getMessage(time);
+      },
+    );
+  }
+
+  getMessage(time) {
+    const d = Math.floor(time / (24 * 60 * 60));
+    time = time - (d * 24 * 60 * 60);
+    const h = Math.floor(time / (60 * 60));
+    time = time - (h * 60 * 60);
+    const m = Math.floor(time / (60));
+    time = time - (m * 60);
+    const s = time;
+    return d + ' day(s), ' + h + ' hour(s), ' + m + ' minute(s), ' + s + ' second(s)';
   }
 }
