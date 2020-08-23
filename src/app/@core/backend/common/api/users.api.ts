@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 export class UsersApi {
   private readonly apiController: string = 'user';
 
-  constructor(private api: HttpService) {}
+  constructor(private api: HttpService) { }
 
   getCurrent(id): Observable<any> {
     // console.log(id)
@@ -20,13 +20,13 @@ export class UsersApi {
   get(id: number): Observable<any> {
     return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
-        return { ...data};
+        return { ...data };
       }));
   }
-  updateCurrent(user: any): Observable<any> {
-    return this.api.put(`${this.apiController}/${user.id}`, user);
+  updateCurrent(id: any, user: any): Observable<any> {
+    return this.api.put(`${this.apiController}/${id}`, user);
   }
-  
+
   delete(id: number): Observable<boolean> {
     return this.api.delete(`${this.apiController}/${id}`);
   }
@@ -39,5 +39,5 @@ export class UsersApi {
   //   return this.api.put(`${this.apiController}`, item);
   // }
 
-  
+
 }

@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 export class NgxProfileComponent {
   // updatedUser: User
   user: any
-  
+  showFields: boolean
+
   constructor(
     private tokenService: NbTokenService,
     private userService: UsersService,
@@ -23,33 +24,33 @@ export class NgxProfileComponent {
   alive: boolean = true;
 
   ngOnInit() {
-   
+    this.showFields = false
     this.tokenService.get()
       .pipe(takeWhile(() => this.alive))
       .subscribe((token: NbAuthJWTToken) => {
         this.user = token.isValid() ? token.getPayload() : {}
         // console.log(token.getPayload()._id)
-        this.userService.getCurrent(token.getPayload()._id).subscribe(data=>{
+        this.userService.getCurrent(token.getPayload()._id).subscribe(data => {
           console.log(data)
           return this.user = data
         }
-          )
+        )
       });
 
 
   }
+
+  switchModeEdit() {
+    this.showFields ? this.showFields = false : this.showFields = true
+
+  }
   submitUpdate() {
-    this.tokenService.get()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((token: NbAuthJWTToken) => {
-        this.user = token.isValid() ? token.getPayload() : {}
-        // console.log(token.getPayload()._id)
-        this.userService.updateCurrent(token.getPayload()._id).subscribe(data=>{
-          console.log(data)
-          return this.user = data
-        }
-          )
-      });
+
+    console.log(this.user._id)
+    this.userService.updateCurrent(this.user._id, this.user).subscribe(ack => {
+      console.log(ack)
+    }
+    )
 
   }
   submitDelete() {
@@ -58,11 +59,11 @@ export class NgxProfileComponent {
       .subscribe((token: NbAuthJWTToken) => {
         this.user = token.isValid() ? token.getPayload() : {}
         // console.log(token.getPayload()._id)
-        this.userService.delete(token.getPayload()._id).subscribe(data=>{
+        this.userService.delete(token.getPayload()._id).subscribe(data => {
           console.log(data)
-            this.router.navigate(['/auth/login'])
+          this.router.navigate(['/auth/login'])
         }
-          )
+        )
       });
   }
   ngOnDestroy() {
