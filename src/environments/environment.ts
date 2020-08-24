@@ -5,9 +5,8 @@
 
 export const environment = {
   bi_debug: true,
-  apiBase:'https://workandout.herokuapp.com',
+  apiBase: 'https://workandout.herokuapp.com',
   production: false,
   debug_report: false,
   configurationFile: 'application-config.json',
-  apiBase: 'http://localhost:3000',
 };

@@ -17,10 +17,10 @@
 
     <div class="form-control-group">
         <label class="label" size="giant">Prénom</label>
-        <input nbInput fullWidth value="{{user.lastname}}" fieldSize="large" disabled autofocus>
+        <input nbInput fullWidth value="{{user.lastName}}" fieldSize="large" disabled autofocus>
         <br>
         <label class="label" size="giant">Nom</label>
-        <input nbInput fullWidth value="{{user.name}}" fieldSize="large" disabled autofocus>
+        <input nbInput fullWidth value="{{user.firstName}}" fieldSize="large" disabled autofocus>
         <br>
         <label class="label" size="giant">Email</label>
         <input nbInput fullWidth value="{{user.email}}" fieldSize="large" disabled autofocus>
@@ -36,11 +36,11 @@
 
         <div class="form-control-group">
             <label class="label" size="giant">Prénom</label>
-            <input nbInput fullWidth value="{{user.lastname}}" [(ngModel)]="user.lastname" name="lastname" fieldSize="large">
+            <input nbInput fullWidth value="{{user.lastName}}" [(ngModel)]="user.lastName" name="lastname" fieldSize="large">
             <br>
 
             <label class="label" size="giant">Nom</label>
-            <input nbInput fullWidth value="{{user.name}}" [(ngModel)]="user.name" name="name" fieldSize="large">
+            <input nbInput fullWidth value="{{user.firstName}}" [(ngModel)]="user.firstName" name="name" fieldSize="large">
             <br>
 
             <label class="label" size="giant">Email</label>
