@@ -26,7 +26,7 @@ export class UsersService extends UserData {
     return this.api.updateCurrent(id, user);
   }
 
-  delete(id: number): Observable<boolean> {
+  delete(id): Observable<boolean> {
     return this.api.delete(id);
   }
 }
