@@ -1,7 +1,22 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NbCardModule, NbLayoutModule, NbListModule} from '@nebular/theme';
-import { GroupListComponent } from './group-list/group-list.component';
+import {
+  NbAlertModule,
+  NbButtonModule,
+  NbCardModule,
+  NbIconModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbListModule,
+  NbSelectModule
+} from '@nebular/theme';
+import {GroupListComponent} from './group-list/group-list.component';
+import {GroupsRoutingModule} from './groups-routing.module';
+import {GroupViewComponent} from './group-view/group-view.component';
+import {FormsModule} from '@angular/forms';
+import { MemberListComponent } from './member-list/member-list.component';
+import { GroupBoxComponent } from './group-box/group-box.component';
+import { GroupFormComponent } from './group-form/group-form.component';
 
 
 @NgModule({
@@ -10,9 +25,20 @@ import { GroupListComponent } from './group-list/group-list.component';
     NbCardModule,
     NbListModule,
     NbLayoutModule,
+    NbButtonModule,
+    GroupsRoutingModule,
+    NbIconModule,
+    FormsModule,
+    NbInputModule,
+    NbSelectModule,
+    NbAlertModule,
   ],
   declarations: [
     GroupListComponent,
+    GroupViewComponent,
+    MemberListComponent,
+    GroupBoxComponent,
+    GroupFormComponent,
   ],
 })
 export class GroupsModule {

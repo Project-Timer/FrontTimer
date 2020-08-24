@@ -20,7 +20,6 @@ export class NgxProfileComponent {
     protected router: Router,
   ) { }
 
-
   alive: boolean = true;
 
   ngOnInit() {

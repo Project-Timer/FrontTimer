@@ -23,6 +23,24 @@ export class PagesMenu {
             link: '/pages/groups',
             icon: 'people-outline',
           },
+          {
+            title: 'PROJECTS',
+            link: '/pages/project',
+            icon: 'briefcase-outline',
+          },
+
+        ],
+      },
+      {
+        title: 'TIMER',
+        icon: 'clock-outline',
+        expanded: true,
+        children: [
+          {
+            title: 'MY TIMERS',
+            link: '/pages/timer',
+            icon: 'person-outline',
+          },
 
         ],
       },
