@@ -1,5 +1,5 @@
 <h1 id="title" class="title">Work & Out </h1>
-<p class="sub-title">Inscription</p>
+<p class="sub-title">Registration</p>
 
 <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
   <p class="alert-title"><b>Oups!</b></p>
@@ -19,13 +19,13 @@
 
 
     <div class="form-control-group">
-        <label class="label" for="input-user_B">Prénom</label>
+        <label class="label" for="input-user_B">First Name</label>
         <input nbInput
                [(ngModel)]="user.user_B"
                #user_B="ngModel"
                id="first-name"
                name="first-name"
-               placeholder="Prénom"
+               placeholder="Full First Name"
                autofocus
                fullWidth
                fieldSize="large"
@@ -36,26 +36,26 @@
                [attr.aria-invalid]="user_B.invalid && user_B.touched ? true : null">
         <ng-container *ngIf="user_B.invalid && user_B.touched">
           <p class="caption status-danger" *ngIf="user_B.errors?.required">
-            Le prénom complet est obligatoire!
+            The full first name is required!
           </p>
           <p class="caption status-danger" *ngIf="user_B.errors?.minlength || user_B.errors?.maxlength">
-            le prénom du groupe doit contenir
-            entre {{getConfigValue('forms.validation.user_B.minLength')}}
-            et {{getConfigValue('forms.validation.user_B.maxLength')}}
-            caractères
+            the first name of the group must contain
+            between {{getConfigValue('forms.validation.user_B.minLength')}}
+            and {{getConfigValue('forms.validation.user_B.maxLength')}}
+            characters
           </p>
         </ng-container>
       </div>
       
 
   <div class="form-control-group">
-    <label class="label" for="input-name">Nom </label>
+    <label class="label" for="input-name">Name </label>
     <input nbInput
            [(ngModel)]="user.fullName"
            #fullName="ngModel"
            id="input-name"
            name="fullName"
-           placeholder="Nom Complet"
+           placeholder="Last Name"
            autofocus
            fullWidth
            fieldSize="large"
@@ -66,25 +66,25 @@
            [attr.aria-invalid]="fullName.invalid && fullName.touched ? true : null">
     <ng-container *ngIf="fullName.invalid && fullName.touched">
       <p class="caption status-danger" *ngIf="fullName.errors?.required">
-        Le nom complet est obligatoire!
+        Name is required!
       </p>
       <p class="caption status-danger" *ngIf="fullName.errors?.minlength || fullName.errors?.maxlength">
-        le nom doit contenir
-        entre {{getConfigValue('forms.validation.fullName.minLength')}}
-        et {{getConfigValue('forms.validation.fullName.maxLength')}}
-        caractères
+        the name must contain 
+        between {{getConfigValue('forms.validation.fullName.minLength')}}
+        and {{getConfigValue('forms.validation.fullName.maxLength')}}
+        characters
       </p>
     </ng-container>
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-email">Adresse Mail</label>
+    <label class="label" for="input-email">Adress Mail</label>
     <input nbInput
            [(ngModel)]="user.email"
            #email="ngModel"
            id="input-email"
            name="email"
-           placeholder="Adresse Mail"
+           placeholder="Adress Mail"
            fullWidth
            fieldSize="large"
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
@@ -92,23 +92,23 @@
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
     <ng-container *ngIf="email.invalid && email.touched">
       <p class="caption status-danger" *ngIf="email.errors?.required">
-        Adresse Mail est obligatoire!
+        Mail address is required!
       </p>
       <p class="caption status-danger" *ngIf="email.errors?.pattern">
-        Adresse Mail doit être correct!
+        Mail address must be correct!
       </p>
     </ng-container>
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-password">Mot de passe</label>
+    <label class="label" for="input-password">Password</label>
     <input nbInput
            [(ngModel)]="user.password"
            #password="ngModel"
            type="password"
            id="input-password"
            name="password"
-           placeholder="Choisissez un mot de passe"
+           placeholder="Choose a password"
            fullWidth
            fieldSize="large"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
@@ -118,7 +118,7 @@
            [attr.aria-invalid]="password.invalid && password.touched ? true : null">
     <ng-container *ngIf="password.invalid && password.touched">
       <p class="caption status-danger" *ngIf="password.errors?.required">
-        Mot de passe obligatoire
+        Password required
       </p>
       <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
         Mot de passe doit être 
@@ -130,14 +130,14 @@
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-re-password">Confirmez le mot de passe</label>
+    <label class="label" for="input-re-password">Confirm your password</label>
     <input nbInput
            [(ngModel)]="user.confirmPassword"
            #rePass="ngModel"
            type="password"
            id="input-re-password"
            name="rePass"
-           placeholder="Confirmer le mot de passe"
+           placeholder="Confirm your password"
            fullWidth
            fieldSize="large"
            [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : ''"
@@ -145,10 +145,10 @@
            [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
     <ng-container *ngIf="rePass.invalid && rePass.touched">
       <p class="caption status-danger" *ngIf="rePass.errors?.required">
-        Confirmation du mot de passe est obligatoire!
+        Password confirmation is required!
       </p>
       <p class="caption status-danger" *ngIf="password.value != rePass.value && !rePass.errors?.required">
-          Le mot de passe ne correspondent pas à celui saisi au champs précedent .
+          The password does not match the one entered in the previous field.
       </p>
     </ng-container>
   </div>
@@ -162,9 +162,9 @@
         [disabled]="!form.valid" 
         (click)="inscription(user.user_B, user.fullName, user.email, user.password)" 
         [class.btn-pulse]="submitted">
-    Créer un compte
+        Create an account
 </button>
 
 <section class="another-action" aria-label="Sign in">
-  Vous avez déjà un compte? <a class="text-link" routerLink="../login" href="../#/auth/log">Log in</a>
+  Already have an account? <a class="text-link" routerLink="../login" href="../#/auth/login">Log in</a>
 </section>
