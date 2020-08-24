@@ -34,6 +34,7 @@ export class TimerUserComponent implements OnInit {
         this.timers = data.filter(obj => {
           return obj.dateEnd !== undefined;
         });
+        this.timers.sort((a, b) => (a.dateStart < b.dateStart) ? 1 : -1);
         this.cr.detectChanges();
       },
     );

@@ -46,6 +46,9 @@ export class GroupViewComponent implements OnInit {
     for (const groupUser of this.group.users) {
       newGroup.users.push(groupUser._id);
     }
+    if (typeof newGroup.admin !== 'string') {
+      newGroup.admin = this.group.admin._id;
+    }
     this.groupService.updateGroup(newGroup).subscribe(
       data => {
         this.toaster.success('Group successfully updated', 'Success', {'duration': 5000});
