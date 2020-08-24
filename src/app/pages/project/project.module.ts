@@ -16,11 +16,12 @@ import {ProjectFormComponent} from './project-form/project-form.component';
 import {GroupListComponent} from './group-list/group-list.component';
 import {ProjectBoxComponent} from './project-box/project-box.component';
 import {ProjectViewComponent} from './project-view/project-view.component';
+import {TimerModalComponent} from '../timer/timer-modal/timer-modal.component';
 
 
 @NgModule({
   declarations: [ProjectListComponent, ProjectFormComponent, GroupListComponent, ProjectBoxComponent,
-    ProjectViewComponent],
+    ProjectViewComponent, TimerModalComponent],
   imports: [
     CommonModule,
     ProjectRoutingModule,

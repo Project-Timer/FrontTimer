@@ -1,0 +1,21 @@
+<td>{{ timer.project ? timer.project.name : '-' }}</td>
+<td>{{ timer.dateStart|date:'mediumDate' }}</td>
+<td class="w-12">{{ timer.dateStart && timer.dateEnd ? getDiff() : '-' }}</td>
+<td class="w-30">
+  <ng-container *ngIf="edit; then editInput else show"></ng-container>
+  <ng-template #show>
+    {{ timer.description ? timer.description : 'No description' }}
+  </ng-template>
+  <ng-template #editInput>
+    <textarea type="text" [(ngModel)]="timer.description" class="w-100" nbInput fieldSize="large" shape="semi-round"
+              placeholder="Accomplished tasks..."></textarea>
+  </ng-template>
+</td>
+<td class="w-8">
+  <button nbButton size="tiny" shape="semi-round" status="danger" (click)="delete()">
+    <nb-icon icon="trash-2-outline"></nb-icon>
+  </button>
+  <button nbButton size="tiny" shape="semi-round" status="{{ edit ? 'success' : 'warning' }}" class="mt-1" (click)="editDescription()">
+    <nb-icon icon="edit-outline"></nb-icon>
+  </button>
+</td>

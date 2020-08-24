@@ -35,7 +35,7 @@ export class ProjectViewComponent implements OnInit {
     for (const groupValue of this.project.groups) {
       newProject.groups.push(groupValue._id);
     }
-    delete newProject.admin;
+    newProject.admin = this.project.admin._id;
     this.projectService.updateProject(newProject).subscribe(
       data => {
         this.toaster.success('Project successfully updated', 'Success', {'duration': 5000});
