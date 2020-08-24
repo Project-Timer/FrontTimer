@@ -54,7 +54,7 @@ export class NgxProfileComponent {
   }
   submitDelete() {
 
-    if (window.confirm(`Would You Like to confirm the deletion of ${this.user.name}'s account? Please note that this action is irreversible`)) {
+    if (window.confirm(`Would You Like to confirm the deletion of ${this.user.firstName}'s account? Please note that this action is irreversible`)) {
 
       this.userService.delete(this.user._id).subscribe(data => {
         this.tokenService.clear()
