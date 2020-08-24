@@ -41,6 +41,11 @@ export class PagesMenu {
             link: '/pages/timer',
             icon: 'person-outline',
           },
+          {
+            title: 'MY STATS',
+            link: '/pages/timer/my-stats',
+            icon: 'bar-chart-outline',
+          },
 
         ],
       },

@@ -1,0 +1,10 @@
+@import '~app/@theme/styles/themes';
+
+@include nb-install-component() {
+  .chart-style {
+    background: nb-theme(background-basic-color-2);
+    padding: 0.5em;
+    height: 25em;
+    border-radius: 0.5em;
+  }
+}

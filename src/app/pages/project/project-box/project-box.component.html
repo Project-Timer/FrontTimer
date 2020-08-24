@@ -12,22 +12,31 @@
         </p>
       </div>
       <div class="text-right col-5">
-        <button (click)="showGroups()" nbButton size="tiny" shape="semi-round" status="primary" class="mr-2">
-          <nb-icon icon="people-outline"></nb-icon>
-        </button>
-        <a [routerLink]="'view/'+[project._id]" *ngIf="project.admin._id === user._id">
-          <button nbButton size="tiny" shape="semi-round" status="warning" class="mr-2">
-            <nb-icon icon="settings-outline"></nb-icon>
+        <div>
+          <button (click)="showGroups()" nbButton size="tiny" shape="semi-round" status="primary">
+            <nb-icon icon="people-outline"></nb-icon>
           </button>
-        </a>
-        <button nbButton size="tiny" shape="semi-round" status="info" *ngIf="showBtnTimer && timer == null"
-                (click)="changeTimerStatus()">
-          <nb-icon icon="play-circle-outline"></nb-icon>
-        </button>
-        <button nbButton size="tiny" shape="semi-round" status="danger" *ngIf="showBtnTimer && timer != null"
-                (click)="changeTimerStatus()" nbTooltip="{{ tooltipMessage }}" nbTooltipPlacement="bottom">
-          <nb-icon icon="stop-circle-outline"></nb-icon>
-        </button>
+          <a [routerLink]="'view/'+[project._id]" *ngIf="project.admin._id === user._id">
+            <button nbButton size="tiny" shape="semi-round" status="warning" class="ml-2">
+              <nb-icon icon="settings-outline"></nb-icon>
+            </button>
+          </a>
+          <button nbButton size="tiny" shape="semi-round" status="info" class="ml-2" *ngIf="showBtnTimer && timer == null"
+                  (click)="changeTimerStatus()">
+            <nb-icon icon="play-circle-outline"></nb-icon>
+          </button>
+          <button nbButton size="tiny" shape="semi-round" status="danger" class="ml-2" *ngIf="showBtnTimer && timer != null"
+                  (click)="changeTimerStatus()" nbTooltip="{{ tooltipMessage }}" nbTooltipPlacement="bottom">
+            <nb-icon icon="stop-circle-outline"></nb-icon>
+          </button>
+        </div>
+        <div>
+          <a [routerLink]="'/pages/timer/stats-project/'+[project._id]" class="text-decoration-none">
+            <button nbButton size="tiny" shape="semi-round" status="success" class="mt-2">
+              <nb-icon icon="bar-chart-outline"></nb-icon> Stats
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   </nb-card-header>
