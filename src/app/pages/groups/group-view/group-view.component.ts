@@ -10,15 +10,15 @@ import {NbToastrService} from '@nebular/theme';
   styleUrls: ['./group-view.component.scss'],
 })
 export class GroupViewComponent implements OnInit {
-  private group;
-  private editMode = false;
-  private show = false;
-  private members;
-  private selectedValue = [];
-  private user;
-  private editAdmin = false;
-  private adminList;
-  private selectAdmin = null;
+  group;
+  editMode = false;
+  show = false;
+  members;
+  selectedValue = [];
+  user;
+  editAdmin = false;
+  adminList;
+  selectAdmin = null;
 
   constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router,
               private toaster: NbToastrService, private tokenService: NbTokenService, private cr: ChangeDetectorRef) {
