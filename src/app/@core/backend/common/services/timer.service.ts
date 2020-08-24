@@ -25,8 +25,11 @@ export class TimerService {
       });
   }
 
-  startTimer(project: number): Observable<any> {
-    return this.http.post<any>(this.baseEndPoint + '/timer/', JSON.stringify({'project': project}),
+  startTimer(project: number, description: string = null): Observable<any> {
+    return this.http.post<any>(this.baseEndPoint + '/timer/', JSON.stringify({
+        'project': project,
+        'description': description,
+      }),
       this.httpOptions);
   }
 

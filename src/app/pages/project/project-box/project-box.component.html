@@ -33,3 +33,4 @@
   </nb-card-header>
   <ngx-group-list [groups]="project.groups" [show]="show"></ngx-group-list>
 </nb-card>
+<ngx-timer-modal [show]="showModal" (someEvent)="changeShowModal($event)"></ngx-timer-modal>

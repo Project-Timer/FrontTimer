@@ -24,6 +24,7 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
   tooltipMessage = 'Please wait...';
   interval = null;
   globalTime = null;
+  showModal = false;
   @Input() user;
   @Input() timer = null;
   @Input() project: any;
@@ -61,24 +62,28 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
   }
 
   public changeTimerStatus() {
-    this.timerService.startTimer(this.project._id).subscribe(
-      data => {
-        this.toaster.success(data.message, 'Success', {'duration': 5000});
-        if (data.active) {
-          this.timer = data.data;
-          this.startTimer();
-          this.someEvent.emit(this.timer);
-        } else {
-          this.timer = null;
-          this.tooltipMessage = 'Please wait...';
-          this.interval = null;
-          this.someEvent.emit(this.timer);
-        }
-      },
-      error => {
-        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
-      },
-    );
+    if (this.timer) {
+      this.showModal = true;
+    } else {
+      this.timerService.startTimer(this.project._id).subscribe(
+        data => {
+          this.toaster.success(data.message, 'Success', {'duration': 5000});
+          if (data.active) {
+            this.timer = data.data;
+            this.startTimer();
+            this.someEvent.emit(this.timer);
+          } else {
+            this.timer = null;
+            this.tooltipMessage = 'Please wait...';
+            this.interval = null;
+            this.someEvent.emit(this.timer);
+          }
+        },
+        error => {
+          this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
+        },
+      );
+    }
   }
 
   public startTimer() {
@@ -95,7 +100,7 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
       if (!this.cr['destroyed']) {
         this.cr.detectChanges();
       }
-      if (this.timer === null) {
+      if (this.timer === null && this.interval !== null) {
         this.interval.unsubscribe();
       }
     });
@@ -136,5 +141,23 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
     time = time - (m * 60);
     const s = time;
     return d + ' day(s), ' + h + ' hour(s), ' + m + ' minute(s), ' + s + ' second(s)';
+  }
+
+  changeShowModal(text) {
+    this.showModal = false;
+    if (text !== 'false') {
+      this.timerService.startTimer(this.project._id, text).subscribe(
+        data => {
+          this.toaster.success(data.message, 'Success', {'duration': 5000});
+          this.timer = null;
+          this.tooltipMessage = 'Please wait...';
+          this.interval = null;
+          this.someEvent.emit(this.timer);
+        },
+        error => {
+          this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
+        },
+      );
+    }
   }
 }
