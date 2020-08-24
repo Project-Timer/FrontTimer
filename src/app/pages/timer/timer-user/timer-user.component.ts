@@ -9,7 +9,7 @@ import {NbToastrService} from '@nebular/theme';
   styleUrls: ['./timer-user.component.scss'],
 })
 export class TimerUserComponent implements OnInit {
-  private timers;
+  timers;
 
   constructor(private route: ActivatedRoute, private timerService: TimerService, private toaster: NbToastrService,
               private cr: ChangeDetectorRef) {

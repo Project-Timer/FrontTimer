@@ -10,9 +10,9 @@ import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 })
 
 export class GroupListComponent implements OnInit {
-  private groups;
-  private show = false;
-  private user;
+  groups;
+  show = false;
+  user;
 
   constructor(private groupService: GroupService, private router: Router, private route: ActivatedRoute,
               private cr: ChangeDetectorRef, private tokenService: NbTokenService) {

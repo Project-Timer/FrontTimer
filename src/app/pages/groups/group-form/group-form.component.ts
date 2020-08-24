@@ -9,12 +9,12 @@ import {NbToastrService} from '@nebular/theme';
   styleUrls: ['./group-form.component.scss'],
 })
 export class GroupFormComponent implements OnInit {
-  private group = {
+  group = {
     name: '',
     users: [],
   };
-  private members;
-  private user;
+  members;
+  user;
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private groupService: GroupService, private tokenService: NbTokenService,
