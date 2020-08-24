@@ -45,40 +45,31 @@ export class NgxProfileComponent {
   }
   submitUpdate() {
 
-    console.log(this.user._id)
-    // this.userService.updateCurrent(this.user._id, this.user).subscribe(ack => {
-    //   console.log(ack)
-    // }
-    // )
-    this.tokenService.get()
-    .pipe(takeWhile(() => this.alive))
-    .subscribe((token: NbAuthJWTToken) => {
-      this.user = token.isValid() ? token.getPayload() : {}
-      // console.log(token.getPayload()._id)
-      this.userService.updateCurrent(token.getPayload()._id, this.user).subscribe(data => ack => {
-          console.log(ack)
-      }
-      )
-    });
+    var userUpdate = {
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email
+    }
+
+    this.userService.updateCurrent(userUpdate).subscribe(data => ack => {
+      console.log(ack)
+    })
+
   }
   submitDelete() {
 
     if (window.confirm(`Would You Like to confirm the deletion of ${this.user.firstName}'s account? Please note that this action is irreversible`)) {
-        this.tokenService.get()
+      this.tokenService.get()
         .pipe(takeWhile(() => this.alive))
         .subscribe((token: NbAuthJWTToken) => {
           this.user = token.isValid() ? token.getPayload() : {}
-          // console.log(token.getPayload()._id)
           this.userService.delete(token.getPayload()._id).subscribe(data => {
             this.tokenService.clear()
             this.router.navigate(['/auth/login'])
           }
           )
         });
-      // this.userService.delete(this.user._id).subscribe(data => {
-      //   this.tokenService.clear()
-      //   this.router.navigate(['/auth/login'])
-      // })
+
     }
   }
   ngOnDestroy() {
