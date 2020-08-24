@@ -19,6 +19,7 @@ import {
   NbToastrModule,
   NbCardModule,
   NbSpinnerModule,
+  NbPopoverModule,
   NbTooltipModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -78,7 +79,8 @@ const NB_MODULES = [
   NbCheckboxModule,
   NbCardModule,
   NbSpinnerModule,
-  NbTooltipModule
+  NbPopoverModule,
+  NbTooltipModule,
 ];
 const COMPONENTS = [
   HeaderComponent,
