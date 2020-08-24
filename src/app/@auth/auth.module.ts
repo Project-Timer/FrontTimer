@@ -35,8 +35,7 @@ export function filterInterceptorRequest(req: HttpRequest<any>): boolean {
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          // baseEndpoint: environment.apiUrl,
-          baseEndpoint: 'http://localhost:3000',
+          baseEndpoint: 'https://workandout.herokuapp.com',
           login: {
             endpoint: '/login',
             method: 'post',

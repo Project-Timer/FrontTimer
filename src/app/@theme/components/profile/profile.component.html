@@ -1,21 +1,70 @@
 <h1 id="title" class="title">Work & Out</h1>
 <p class="sub-title">Profil</p>
 
-<div class="form-control-group">
-    <label class="label" size="large">Identifiant</label>
-    <input nbInput fullWidth value="{{user.id}}" fieldSize="large" autofocus >
-</div>
-<div class="form-control-group">
-    <label class="label"  size="large">Nom</label>
-    <input nbInput fullWidth value="{{user.name}}" fieldSize="large"  >
-</div>
-<div class="form-control-group">
-    <label class="label" size="large">Role</label>
-    <input nbInput fullWidth value="{{user.role}}" fieldSize="large"  >
-</div>
-<div class="form-control-group">
-    <label class="label" size="large">Groupe</label>
-    <!-- a changer le role par groupe -->
-    <input nbInput fullWidth value="{{user.role}}" fieldSize="large" >
+<div class="offset-11">
+    <button nbButton *ngIf="!showFields" nbTooltip="Switch to Edit Mode" nbTooltipStatus="primary" status="info"
+        type="submit" (click)="switchModeEdit()" size="small">
+        <nb-icon icon="edit-2-outline"></nb-icon>
+    </button>
+
+    <button nbButton *ngIf="showFields" nbTooltip="Switch to View Mode" nbTooltipStatus="primary" status="info"
+        type="submit" (click)="switchModeEdit()" size="small">
+        <nb-icon icon="book-open-outline"></nb-icon>
+    </button>
 </div>
 
+<div *ngIf="!showFields">
+
+    <div class="form-control-group">
+        <label class="label" size="giant">Prénom</label>
+        <input nbInput fullWidth value="{{user.lastname}}" fieldSize="large" disabled autofocus>
+        <br>
+        <label class="label" size="giant">Nom</label>
+        <input nbInput fullWidth value="{{user.name}}" fieldSize="large" disabled autofocus>
+        <br>
+        <label class="label" size="giant">Email</label>
+        <input nbInput fullWidth value="{{user.email}}" fieldSize="large" disabled autofocus>
+
+    </div>
+
+</div>
+
+
+<div *ngIf="showFields">
+
+    <form (ngSubmit)="submitUpdate()">
+
+        <div class="form-control-group">
+            <label class="label" size="giant">Prénom</label>
+            <input nbInput fullWidth value="{{user.lastname}}" [(ngModel)]="user.lastname" name="lastname" fieldSize="large">
+            <br>
+
+            <label class="label" size="giant">Nom</label>
+            <input nbInput fullWidth value="{{user.name}}" [(ngModel)]="user.name" name="name" fieldSize="large">
+            <br>
+
+            <label class="label" size="giant">Email</label>
+            <input nbInput fullWidth value="{{user.email}}" [(ngModel)]="user.email" name="email" fieldSize="large">
+
+        </div>
+
+    </form>
+
+
+</div>
+
+
+<div class="row">
+
+
+    <button nbButton *ngIf="showFields" class="offset-1 col-4" nbTooltip="Confirm updating your profile"
+        nbTooltipStatus="primary" status="success" type="submit" (click)="submitUpdate()">
+        Update Profile
+    </button>
+
+    <button nbButton class="offset-3 col-4 " status="danger"
+        (click)="submitDelete()">
+        Delete Account
+    </button>
+
+</div>

@@ -15,7 +15,7 @@
   </ul>
 </nb-alert>
 
-<form (ngSubmit)="register()" #form="ngForm" aria-labelledby="title">
+<form #form="ngForm" aria-labelledby="title">
 
 
     <div class="form-control-group">
@@ -147,7 +147,7 @@
       <p class="caption status-danger" *ngIf="rePass.errors?.required">
         Password confirmation is required!
       </p>
-      <p class="caption status-danger" *ngIf="password.value != rePass.value && !rePass.errors?.required">
+      <p class="caption status-danger" *ngIf="user.password != user.confirmPassword && !rePass.errors?.required">
           The password does not match the one entered in the previous field.
       </p>
     </ng-container>
@@ -159,7 +159,7 @@
         fullWidth 
         status="primary" 
         size="large"
-        [disabled]="!form.valid" 
+        [disabled]="submitted || !form.valid || user.password != user.confirmPassword" 
         (click)="inscription(user.user_B, user.fullName, user.email, user.password)" 
         [class.btn-pulse]="submitted">
         Create an account
