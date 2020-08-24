@@ -5,12 +5,13 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UsersApi {
-  private readonly apiController: string = 'users';
+  private readonly apiController: string = 'user';
 
-  constructor(private api: HttpService) {}
+  constructor(private api: HttpService) { }
 
-  getCurrent(): Observable<any> {
-    return this.api.get(`${this.apiController}/current`)
+  getCurrent(id): Observable<any> {
+    // console.log(id)
+    return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
         return data
       }));
@@ -19,9 +20,11 @@ export class UsersApi {
   get(id: number): Observable<any> {
     return this.api.get(`${this.apiController}/${id}`)
       .pipe(map(data => {
-        const picture = `${this.api.apiUrl}/${this.apiController}/${data.id}/photo`;
-        return { ...data, picture };
+        return { ...data };
       }));
+  }
+  updateCurrent(id: any, user: any): Observable<any> {
+    return this.api.put(`${this.apiController}/${id}`, user);
   }
 
   delete(id: number): Observable<boolean> {
@@ -32,11 +35,9 @@ export class UsersApi {
     return this.api.post(this.apiController, item);
   }
 
-  updateCurrent(item: any): Observable<any> {
-    return this.api.put(`${this.apiController}/current`, item);
-  }
+  // updateCurrent(item: any): Observable<any> {
+  //   return this.api.put(`${this.apiController}`, item);
+  // }
 
-  update(item: any): Observable<any> {
-    return this.api.put(`${this.apiController}/${item.id}`, item);
-  }
+
 }

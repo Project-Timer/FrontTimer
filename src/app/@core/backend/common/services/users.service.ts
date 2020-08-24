@@ -10,8 +10,8 @@ export class UsersService extends UserData {
     super();
   }
 
-  getCurrentUser(): Observable<User> {
-    return this.api.getCurrent();
+  getCurrent(id): Observable<any> {
+    return this.api.getCurrent(id);
   }
 
   get(id: number): Observable<User> {
@@ -22,12 +22,8 @@ export class UsersService extends UserData {
     return this.api.add(user);
   }
 
-  update(user: any): Observable<User> {
-    return this.api.update(user);
-  }
-
-  updateCurrent(user: any): Observable<User> {
-    return this.api.updateCurrent(user);
+  updateCurrent(id: any, user: any): Observable<User> {
+    return this.api.updateCurrent(id, user);
   }
 
   delete(id: number): Observable<boolean> {

@@ -1,0 +1,20 @@
+<ng-container *ngIf="show">
+  <nb-card class="position-absolute list">
+    <ng-container *ngIf="members.length > 0; then list else empty"></ng-container>
+    <ng-template #list>
+      <nb-list>
+        <nb-list-item *ngFor="let member of members">
+          <p>
+            {{ member.firstName|uppercase }} {{ member.lastName }}
+          </p>
+          <p>
+            {{ member.email }}
+          </p>
+        </nb-list-item>
+      </nb-list>
+    </ng-template>
+    <ng-template #empty>
+      <div class="h6 m-3">No member in this group</div>
+    </ng-template>
+  </nb-card>
+</ng-container>

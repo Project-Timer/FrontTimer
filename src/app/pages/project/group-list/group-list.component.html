@@ -1,0 +1,15 @@
+<ng-container *ngIf="show">
+  <nb-card class="position-absolute list">
+    <ng-container *ngIf="groups.length > 0; then list else empty"></ng-container>
+    <ng-template #list>
+      <nb-list>
+        <nb-list-item *ngFor="let group of groups">
+            {{ group.name }}
+        </nb-list-item>
+      </nb-list>
+    </ng-template>
+    <ng-template #empty>
+      <div class="h6 m-3">No groups in this project</div>
+    </ng-template>
+  </nb-card>
+</ng-container>
