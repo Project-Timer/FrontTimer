@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {GroupService} from '../group.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
@@ -16,9 +16,12 @@ export class GroupViewComponent implements OnInit {
   private members;
   private selectedValue = [];
   private user;
+  private editAdmin = false;
+  private adminList;
+  private selectAdmin = null;
 
   constructor(private groupService: GroupService, private route: ActivatedRoute, private router: Router,
-              private toaster: NbToastrService, private tokenService: NbTokenService) {
+              private toaster: NbToastrService, private tokenService: NbTokenService, private cr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -28,6 +31,7 @@ export class GroupViewComponent implements OnInit {
         this.user = token.isValid() ? token.getPayload() : {};
       });
     this.getAllMembers();
+    this.getAdminList();
   }
 
   changeMode() {
@@ -46,6 +50,7 @@ export class GroupViewComponent implements OnInit {
       data => {
         this.toaster.success('Group successfully updated', 'Success', {'duration': 5000});
         this.group = data;
+        this.cr.detectChanges();
       },
       error => {
         this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
@@ -91,6 +96,15 @@ export class GroupViewComponent implements OnInit {
     });
   }
 
+  getAdminList() {
+    this.groupService.getAllMembers().subscribe(data => {
+      this.adminList = data;
+      this.adminList = this.adminList.filter(obj => {
+        return obj._id !== this.user._id;
+      });
+    });
+  }
+
   addUser() {
     for (const value of this.selectedValue) {
       const user = this.members.find(obj => {
@@ -104,5 +118,12 @@ export class GroupViewComponent implements OnInit {
     }
     this.selectedValue = [];
     this.save();
+  }
+
+  saveAdmin() {
+    this.group.admin = this.selectAdmin;
+    this.editAdmin = false;
+    this.save();
+    this.selectAdmin = null;
   }
 }

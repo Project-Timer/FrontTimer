@@ -21,14 +21,35 @@
     </div>
   </div>
   <div class="col-5 position-relative">
-    <nb-card class="member admin">
+    <nb-card class="member admin" *ngIf="!editAdmin">
       <b>
         Administrator of the group
       </b>
-      <p>
+      <p class="mb-1">
         {{ group.admin.firstName|uppercase }} {{ group.admin.lastName }}
         <small>({{ group.admin.email }})</small>
       </p>
+      <button nbButton size="tiny" shape="semi-round" status="warning" (click)="editAdmin = true;">
+        <nb-icon icon="settings-outline"></nb-icon>
+      </button>
+    </nb-card>
+    <nb-card class="member admin" *ngIf="editAdmin">
+      <nb-select [(ngModel)]="selectAdmin" placeholder="Choose members" shape="semi-round" class="search-input mb-1">
+        <nb-option *ngFor="let member of adminList"
+                   value="{{ member._id }}">{{ member.firstName|uppercase }} {{ member.lastName }}</nb-option>
+      </nb-select>
+      <div class="row">
+        <div class="col-6">
+          <button nbButton size="tiny" shape="semi-round" status="success" class="w-100" (click)="selectAdmin !== null ? saveAdmin() : ''">
+            <nb-icon icon="checkmark-outline"></nb-icon>
+          </button>
+        </div>
+        <div class="col-6">
+          <button nbButton size="tiny" shape="semi-round" status="danger" class="w-100" (click)="editAdmin = false;">
+            <nb-icon icon="close-outline"></nb-icon>
+          </button>
+        </div>
+      </div>
     </nb-card>
   </div>
 </div>
