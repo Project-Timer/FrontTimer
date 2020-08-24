@@ -100,7 +100,7 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
       if (!this.cr['destroyed']) {
         this.cr.detectChanges();
       }
-      if (this.timer === null && this.interval !== null) {
+      if (this.timer === null) {
         this.interval.unsubscribe();
       }
     });
