@@ -20,10 +20,10 @@ import {interval} from 'rxjs';
   styleUrls: ['./project-box.component.scss'],
 })
 export class ProjectBoxComponent implements OnInit, OnChanges {
-  private showBtnTimer = false;
-  private tooltipMessage = null;
-  private interval = null;
-  private globalTime = null;
+  showBtnTimer = false;
+  tooltipMessage = 'Please wait...';
+  interval = null;
+  globalTime = null;
   @Input() user;
   @Input() timer = null;
   @Input() project: any;
@@ -48,11 +48,15 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
   }
 
   public checkMemberIn() {
-    for (const projectGroup of this.project.groups) {
-      this.groupService.getGroup(projectGroup._id).subscribe(data => {
-        this.showBtnTimer = data.users.some(u => u._id === this.user._id) || data.admin._id === this.user._id;
-        this.cr.detectChanges();
-      });
+    if (this.project.admin._id === this.user._id) {
+      this.showBtnTimer = true;
+    } else {
+      for (const projectGroup of this.project.groups) {
+        this.groupService.getGroup(projectGroup._id).subscribe(data => {
+          this.showBtnTimer = data.users.some(u => u._id === this.user._id) || data.admin._id === this.user._id;
+          this.cr.detectChanges();
+        });
+      }
     }
   }
 
@@ -66,7 +70,7 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
           this.someEvent.emit(this.timer);
         } else {
           this.timer = null;
-          this.tooltipMessage = null;
+          this.tooltipMessage = 'Please wait...';
           this.interval = null;
           this.someEvent.emit(this.timer);
         }
@@ -118,6 +122,7 @@ export class ProjectBoxComponent implements OnInit, OnChanges {
           }
         }
         this.globalTime = this.getMessage(time);
+        this.cr.detectChanges();
       },
     );
   }

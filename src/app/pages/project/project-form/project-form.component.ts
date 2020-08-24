@@ -10,12 +10,12 @@ import {NbToastrService} from '@nebular/theme';
   styleUrls: ['./project-form.component.scss'],
 })
 export class ProjectFormComponent implements OnInit {
-  private project = {
+  project = {
     name: '',
     groups: [],
   };
   @Input() user;
-  private groups;
+  groups;
   @Output() someEvent = new EventEmitter<string>();
 
   constructor(private projectService: ProjectService, private tokenService: NbTokenService,
