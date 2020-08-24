@@ -10,11 +10,11 @@ import {NbToastrService} from '@nebular/theme';
   styleUrls: ['./project-view.component.scss'],
 })
 export class ProjectViewComponent implements OnInit {
-  private project;
-  private editMode = false;
-  private show = false;
-  private groups;
-  private selectedValue = [];
+  project;
+  editMode = false;
+  show = false;
+  groups;
+  selectedValue = [];
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private router: Router,
               private groupService: GroupService, private toaster: NbToastrService) {

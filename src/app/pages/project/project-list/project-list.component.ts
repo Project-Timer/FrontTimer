@@ -9,10 +9,10 @@ import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
   styleUrls: ['./project-list.component.scss'],
 })
 export class ProjectListComponent implements OnInit {
-  private projects;
-  private show = false;
-  private user;
-  private timer;
+  projects;
+  show = false;
+  user;
+  timer;
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute, private cr: ChangeDetectorRef,
               private tokenService: NbTokenService) {

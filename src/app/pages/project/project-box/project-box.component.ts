@@ -20,10 +20,10 @@ import {interval} from 'rxjs';
   styleUrls: ['./project-box.component.scss'],
 })
 export class ProjectBoxComponent implements OnInit, OnChanges {
-  private showBtnTimer = false;
-  private tooltipMessage = 'Please wait...';
-  private interval = null;
-  private globalTime = null;
+  showBtnTimer = false;
+  tooltipMessage = 'Please wait...';
+  interval = null;
+  globalTime = null;
   @Input() user;
   @Input() timer = null;
   @Input() project: any;
