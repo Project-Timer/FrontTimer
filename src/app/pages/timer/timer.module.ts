@@ -5,10 +5,13 @@ import {TimerRoutingModule} from './timer-routing.module';
 import {NbButtonModule, NbIconModule, NbInputModule} from '@nebular/theme';
 import {TimerUserRowComponent} from './timer-user-row/timer-user-row.component';
 import {FormsModule} from '@angular/forms';
+import { TimerUserChartComponent } from './timer-user-chart/timer-user-chart.component';
+import {ChartModule} from 'angular2-chartjs';
+import {TimerProjectChartComponent} from './timer-project-chart/timer-project-chart.component';
 
 
 @NgModule({
-  declarations: [TimerUserComponent, TimerUserRowComponent],
+  declarations: [TimerUserComponent, TimerUserRowComponent, TimerUserChartComponent, TimerProjectChartComponent],
   imports: [
     CommonModule,
     TimerRoutingModule,
@@ -16,6 +19,7 @@ import {FormsModule} from '@angular/forms';
     NbIconModule,
     NbInputModule,
     FormsModule,
+    ChartModule,
   ],
 })
 export class TimerModule {
