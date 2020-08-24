@@ -7,25 +7,15 @@
   <thead>
   <tr>
     <th>Project</th>
-    <th>Start date</th>
-    <th>End date</th>
+    <th>Date</th>
     <th>Work time</th>
+    <th>Accomplished tasks</th>
     <th>Action</th>
   </tr>
   </thead>
   <tbody>
   <ng-container *ngFor="let timer of timers">
-    <tr>
-      <td>{{ timer.project ? timer.project.name : '-' }}</td>
-      <td>{{ timer.dateStart|date:'mediumDate' }}</td>
-      <td>{{ timer.dateEnd|date:'mediumDate' }}</td>
-      <td>{{ timer.dateStart && timer.dateEnd ? getDiff(timer.dateStart, timer.dateEnd) : '-' }}</td>
-      <td>
-        <button nbButton size="tiny" shape="semi-round" status="danger" (click)="delete(timer)">
-          <nb-icon icon="trash-2-outline"></nb-icon>
-        </button>
-      </td>
-    </tr>
+    <tr ngx-timer-user-row [timer]="timer" (someEvent)="getTimers()"></tr>
   </ng-container>
   </tbody>
 </table>

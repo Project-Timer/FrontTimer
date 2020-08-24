@@ -1,0 +1,23 @@
+@import '~app/@theme/styles/themes';
+
+@include nb-install-component() {
+  th, td {
+    background: nb-theme(background-basic-color-2);
+    color: nb-theme(color-basic-600);
+    border: 1px solid #eee;
+    padding: 10px 30px;
+    border-collapse: collapse;
+  }
+
+  .w-12 {
+    width: 12em;
+  }
+
+  .w-8 {
+    width: 8em;
+  }
+
+  .w-30 {
+    width: 30em;
+  }
+}

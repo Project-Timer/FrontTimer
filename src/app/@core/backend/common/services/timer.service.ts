@@ -41,6 +41,10 @@ export class TimerService {
     return this.http.get<any[]>(this.baseEndPoint + '/timers/project/' + id, this.httpOptions);
   }
 
+  update(timer: any) {
+    return this.http.put<any>(this.baseEndPoint + '/timer/' + timer._id, timer, this.httpOptions);
+  }
+
   delete(id: number) {
     return this.http.delete(this.baseEndPoint + '/timer/' + id, {observe: 'response'});
   }

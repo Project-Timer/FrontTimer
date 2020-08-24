@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TimerService} from '../../../@core/backend/common/services/timer.service';
-import {NbToastrService} from '@nebular/theme';
+import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
 
 @Component({
   selector: 'ngx-timer-user',
@@ -10,41 +10,31 @@ import {NbToastrService} from '@nebular/theme';
 })
 export class TimerUserComponent implements OnInit {
   timers;
+  user;
 
-  constructor(private route: ActivatedRoute, private timerService: TimerService, private toaster: NbToastrService,
+  constructor(private route: ActivatedRoute, private tokenService: NbTokenService, private timerService: TimerService,
               private cr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.tokenService.get()
+      .subscribe((token: NbAuthJWTToken) => {
+        this.user = token.isValid() ? token.getPayload() : {};
+      });
     this.timers = this.route.snapshot.data.timers;
+    this.timers = this.timers.filter(obj => {
+      return obj.dateEnd !== undefined;
+    });
+    this.timers.sort((a, b) => (a.dateStart < b.dateStart) ? 1 : -1);
   }
 
-  getDiff(dateOne, dateTwo) {
-    dateOne = new Date(dateOne).getTime();
-    dateTwo = new Date(dateTwo).getTime();
-    let diff = Math.round((dateTwo - dateOne) / 1000);
-    const d = Math.floor(diff / (24 * 60 * 60));
-    diff = diff - (d * 24 * 60 * 60);
-    const h = Math.floor(diff / (60 * 60));
-    diff = diff - (h * 60 * 60);
-    const m = Math.floor(diff / (60));
-    diff = diff - (m * 60);
-    const s = diff;
-    return d + ' day(s), ' + h + ' hour(s), ' + m + ' minute(s), ' + s + ' second(s)';
-  }
-
-  delete(timer) {
-    const id = timer._id;
-    this.timerService.delete(id).subscribe(
-      res => {
-        this.timers = this.timers.filter(obj => {
-          return obj._id !== id;
+  getTimers() {
+    return this.timerService.getTimersByUser(this.user._id).subscribe(
+      data => {
+        this.timers = data.filter(obj => {
+          return obj.dateEnd !== undefined;
         });
         this.cr.detectChanges();
-        this.toaster.success('Timer successfully deleted', 'Success', {'duration': 5000});
-      },
-      error => {
-        this.toaster.danger(error.error.message, 'Oops...', {'duration': 5000});
       },
     );
   }
