@@ -10,16 +10,5 @@ export class NgxLoginComponent extends NbLoginComponent {
   // login() {
   //   this.router.navigate(['/']);
   // }
-  showPassword = true;
-
-  // getInputType() {
-  //   if (this.showPassword) {
-  //     return 'text';
-  //   }
-  //   return 'password';
-  // }
-
-  // toggleShowPassword() {
-  //   this.showPassword = !this.showPassword;
-  // }
+  
 }

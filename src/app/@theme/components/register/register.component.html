@@ -25,6 +25,7 @@
                #firstName="ngModel"
                id="first-name"
                name="first-name"
+               required
                type="name"
                placeholder="First Name"
                autofocus
@@ -32,16 +33,15 @@
                minLength="2"
                fieldSize="large"
                [status]="firstName.dirty ? (firstName.invalid  ? 'danger' : 'success') : 'basic'"
-               [required]="getConfigValue('forms.validation.fullName.required')"
                minlength="2"
                [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
                [attr.aria-invalid]="firstName.invalid && firstName.touched ? true : null">
         <ng-container *ngIf="firstName.invalid && firstName.touched">
           <p class="caption status-danger" *ngIf="firstName.errors?.required">
-            The full first name is required!
+            The first name is required!
           </p>
           <p class="caption status-danger" *ngIf="firstName.errors?.minlength || firstName.errors?.maxlength">
-            the first name of the group must contain
+            The first name must contain
             between 2
             and {{getConfigValue('forms.validation.fullName.maxLength')}}
             characters
@@ -63,9 +63,9 @@
            class="uppercase"
            autofocus
            fullWidth
+           required
            fieldSize="large"
            [status]="lastName.dirty ? (lastName.invalid  ? 'danger' : 'success') : 'basic'"
-           [required]="getConfigValue('forms.validation.lastName.required')"
            minlength="2"
            [maxlength]="getConfigValue('forms.validation.fullName.maxLength')"
            [attr.aria-invalid]="lastName.invalid && lastName.touched ? true : null">
@@ -74,7 +74,7 @@
         Name is required!
       </p>
       <p class="caption status-danger" *ngIf="lastName.errors?.minlength || lastName.errors?.maxlength">
-        the name must contain 
+        The last name must contain 
         between 2
         and {{getConfigValue('forms.validation.fullName.maxLength')}}
         characters
@@ -94,7 +94,6 @@
            fullWidth
            fieldSize="large"
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
-           [required]="getConfigValue('forms.validation.email.required')"
            [attr.aria-invalid]="email.invalid && email.touched ? true : null">
     <ng-container *ngIf="email.invalid && email.touched">
       <p class="caption status-danger" *ngIf="email.errors?.required">
@@ -102,6 +101,9 @@
       </p>
       <p class="caption status-danger" *ngIf="email.errors?.pattern">
         Email address must be correct!
+      </p>
+      <p class="caption status-danger" *ngIf="email.errors?.Email">
+        Email address has been already taken!
       </p>
     </ng-container>
   </div>
@@ -127,10 +129,10 @@
         Password required
       </p>
       <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
-        Mot de passe doit être 
-        entre 8
-        et {{ getConfigValue('forms.validation.password.maxLength') }}
-        caractères
+        The password must contain 
+        between 8
+        and {{ getConfigValue('forms.validation.password.maxLength') }}
+        characters
       </p>
     </ng-container>
   </div>
@@ -165,7 +167,7 @@
         fullWidth 
         status="primary" 
         size="large"
-        [disabled]="submitted || !form.valid || firstName.valid || lastName.valid|| user.password != user.confirmPassword" 
+        [disabled]="submitted || !form.valid || user.password != user.confirmPassword" 
         (click)="inscription(user.firstName, user.lastName, user.email, user.password)" 
         [class.btn-pulse]="submitted">
         Create an account
