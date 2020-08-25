@@ -23,14 +23,21 @@ export class UsersApi {
         return { ...data };
       }));
   }
-  updateCurrent(id: any, user: any): Observable<any> {
-    return this.api.put(`${this.apiController}/${id}`, user);
+  updateCurrent(user: any): Observable<any> {
+    return this.api.put(`${this.apiController}`, user)
+      .pipe(map(data => {
+        return data ;
+      }));
   }
 
-  delete(id: number): Observable<boolean> {
-    return this.api.delete(`${this.apiController}/${id}`);
-  }
 
+  delete(id): Observable<any> {
+    // console.log(id)
+    return this.api.delete(`${this.apiController}`)
+      .pipe(map(data => {
+        return data
+      }));
+  }
   add(item: any): Observable<any> {
     return this.api.post(this.apiController, item);
   }

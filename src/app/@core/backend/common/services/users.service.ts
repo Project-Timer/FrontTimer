@@ -22,11 +22,11 @@ export class UsersService extends UserData {
     return this.api.add(user);
   }
 
-  updateCurrent(id: any, user: any): Observable<User> {
-    return this.api.updateCurrent(id, user);
+  updateCurrent(user: any): Observable<User> {
+    return this.api.updateCurrent(user);
   }
 
-  delete(id: number): Observable<boolean> {
+  delete(id): Observable<boolean> {
     return this.api.delete(id);
   }
 }
