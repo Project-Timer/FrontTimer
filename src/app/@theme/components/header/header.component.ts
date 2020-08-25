@@ -64,8 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     this.userMenu = [
       { title: 'Profil', icon: 'person-outline', link: 'auth/profile' },
-      { title: 'Paramètres', icon: 'settings-2-outline', link: '' },
-      { title: 'Se Déconnecter', icon: 'log-out-outline', link: '/auth/logout' },
+      { title: 'Log out', icon: 'log-out-outline', link: '/auth/logout' },
     ];
 
     this.currentTheme = this.themeService.currentTheme;
