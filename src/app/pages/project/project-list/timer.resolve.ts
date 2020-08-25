@@ -1,15 +1,17 @@
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {TimerService} from '../../../@core/backend/common/services/timer.service';
 import {NbAuthJWTToken, NbTokenService} from '@nebular/auth';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {NbToastrService} from '@nebular/theme';
 
 @Injectable()
 export class TimerResolve implements Resolve<any> {
   private user;
 
-  constructor(private timerService: TimerService, private tokenService: NbTokenService) {
+  constructor(private timerService: TimerService, private tokenService: NbTokenService,
+              private toaster: NbToastrService, private router: Router) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
@@ -19,6 +21,11 @@ export class TimerResolve implements Resolve<any> {
       });
     return this.timerService.getTimersByUser(this.user._id).pipe(
       map(res => res),
+      catchError(() => {
+        this.toaster.danger('A server error has occured. Please try later!', 'Oops...', {'duration': 5000});
+        this.router.navigate(['/']);
+        return EMPTY;
+      }),
     );
   }
 
