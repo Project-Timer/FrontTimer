@@ -23,10 +23,11 @@ export class NgxRegisterComponent extends NbRegisterComponent {
   }
   inscription(lastname, name, email, password) {
     this.service.register('email', {lastName: lastname, firstName: name, email: email, password: password }).subscribe(res => {
-      this.toasterService.success(`l'utilisateur ${name + " " + lastname} a été enregistré avec succes.`, `Opération Réussie`, { duration: 3500 });
+      this.toasterService.success(`User ${lastname + " " + name} has been successfully registered.`, `Successful operation`, { duration: 3500 });
     }
     ), err => {
-      this.toasterService.danger(`Http Code: ${err.status}`, `Erreur dans l'enregistrement de l'utilisateur`, { duration: 4500 });
+      
+      this.toasterService.danger(`Http Code: ${err.status}`, `Error in user registration`, { duration: 4500 });
     }
     this.router.navigate(['auth/login']);
   }
