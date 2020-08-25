@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, Inject } from '@angular/core';
 import { NbRegisterComponent, NbAuthService, NB_AUTH_OPTIONS } from '@nebular/auth';
 import { NbToastrService } from '@nebular/theme';
 import { Router } from '@angular/router';
+import { error } from 'util';
 
 
 @Component({
@@ -21,14 +22,15 @@ export class NgxRegisterComponent extends NbRegisterComponent {
   }
   ngOnInit(){
   }
-  inscription(lastname, name, email, password) {
-    this.service.register('email', {lastName: lastname, firstName: name, email: email, password: password }).subscribe(res => {
-      this.toasterService.success(`User ${lastname + " " + name} has been successfully registered.`, `Successful operation`, { duration: 3500 });
+  inscription(firstName, lastName, email, password) {
+    this.service.register('email', {firstName: firstName, lastName: lastName, email: email, password: password }).subscribe(res => {
+      this.toasterService.success(`User ${firstName + " " + lastName} has been successfully registered.`, `Successful operation`, { duration: 3500 });
     }
-    ), err => {
+    ), error => {
       
-      this.toasterService.danger(`Http Code: ${err.status}`, `Error in user registration`, { duration: 4500 });
-    }
+        this.toasterService.danger(`Http Code: ${error.status}`, `Error in user registration`, { duration: 4500 });
+        // this.toasterService.danger(error.error.message, { duration: 4500 });
+      }
     this.router.navigate(['auth/login']);
   }
 }

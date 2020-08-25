@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
 export interface User {
-  lastName: string;
   firstName: string;
+  lastName: string;
   email: string;
 }
 
