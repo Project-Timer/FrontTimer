@@ -1,13 +1,13 @@
 {
-  "name": "nebular",
-  "version": "2.2.0",
+  "name": "workandout",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Project-Timer/FrontTimer"
   },
   "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": "https://github.com/Project-Timer/FrontTimer/issues"
   },
   "browserslist": [
     "> 1%",
@@ -64,6 +64,7 @@
     "core-js": "2.5.1",
     "echarts": "^4.5.0",
     "eva-icons": "^1.1.2",
+    "express": "^4.17.1",
     "intl": "1.2.5",
     "ionicons": "2.0.1",
     "leaflet": "1.2.0",
@@ -82,6 +83,7 @@
     "tinymce": "4.9.10",
     "tslib": "^1.9.0",
     "typeface-exo": "0.0.22",
+    "typescript": "3.4.5",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1"
   },
