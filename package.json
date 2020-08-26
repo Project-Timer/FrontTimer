@@ -18,7 +18,7 @@
     "ng": "ng",
     "conventional-changelog": "conventional-changelog -i releaseNote.md -s",
     "start:all": "ng serve --host 0.0.0.0 --disableHostCheck true",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",
