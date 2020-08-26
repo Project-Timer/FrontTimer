@@ -3,7 +3,7 @@
 
 <nb-select [(ngModel)]="group.users" multiple placeholder="Choose members" fieldSize="large" shape="semi-round"
            class="ml-2 search-input">
-  <nb-option *ngFor="let member of members" value="{{ member._id }}">{{ member.firstName + ' ' + member.lastName }}</nb-option>
+  <nb-option *ngFor="let member of members" value="{{ member._id }}">{{ member.firstName + ' ' + member.lastName|uppercase }}</nb-option>
 </nb-select>
 
 <button class="ml-2" nbButton size="tiny" shape="semi-round" fieldSize="large" status="success" (click)="save();">
