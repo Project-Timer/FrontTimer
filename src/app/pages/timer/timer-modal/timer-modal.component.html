@@ -1,0 +1,20 @@
+<div id="myModal" class="modal" *ngIf="show">
+  <div class="modal-content">
+    <textarea type="text" [(ngModel)]="text" nbInput fieldSize="large" shape="semi-round"
+              placeholder="What did you do today?"></textarea>
+    <div class="row mt-2 justify-content-center">
+      <div class="col-6">
+        <button class="w-100" nbButton size="tiny" shape="semi-round" fieldSize="large" status="success" (click)="save();">
+          <nb-icon icon="save-outline"></nb-icon>
+          Save and stop timer
+        </button>
+      </div>
+      <div class="col-6">
+        <button class="w-100" nbButton size="tiny" shape="semi-round" fieldSize="large" status="danger" (click)="close();">
+          <nb-icon icon="close-outline"></nb-icon>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

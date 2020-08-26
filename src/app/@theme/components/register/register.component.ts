@@ -1,7 +1,7 @@
-import { Component, ChangeDetectorRef, Inject } from '@angular/core';
-import { NbRegisterComponent, NbAuthService, NB_AUTH_OPTIONS } from '@nebular/auth';
-import { NbToastrService } from '@nebular/theme';
-import { Router } from '@angular/router';
+import {Component, ChangeDetectorRef, Inject} from '@angular/core';
+import {NbRegisterComponent, NbAuthService, NB_AUTH_OPTIONS} from '@nebular/auth';
+import {NbToastrService} from '@nebular/theme';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -19,15 +19,20 @@ export class NgxRegisterComponent extends NbRegisterComponent {
   ) {
     super(service, options, cd, router);
   }
-  ngOnInit(){
-  }
-  inscription(lastname, name, email, password) {
-    this.service.register('email', {lastname: lastname, name: name, email: email, password: password }).subscribe(res => {
-      this.toasterService.success(`l'utilisateur ${name + " " + lastname} a été enregistré avec succes.`, `Opération Réussie`, { duration: 3500 });
-    }
-    ), err => {
-      this.toasterService.danger(`Http Code: ${err.status}`, `Erreur dans l'enregistrement de l'utilisateur`, { duration: 4500 });
-    }
-    this.router.navigate(['auth/login']);
+
+  inscription(firstName, lastName, email, password) {
+    this.service.register('email', {firstName: firstName, lastName: lastName, email: email, password: password})
+      .subscribe(
+        res => {
+          if (res.getResponse().error) {
+            this.toasterService.danger(res.getResponse().error.message, 'Oops...', {duration: 4500});
+          } else {
+            this.toasterService.success(`User ${firstName + ' ' + lastName} has been successfully registered.`, `Successful operation`, {duration: 3500});
+            this.router.navigate(['auth/login']);
+          }
+        },
+        err => {
+          this.toasterService.danger(err.error.message, {duration: 4500});
+        });
   }
 }

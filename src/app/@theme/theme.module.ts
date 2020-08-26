@@ -52,6 +52,13 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
+import { UserData } from '../@core/interfaces/common/users';
+import { UsersService} from '../@core/backend/common/services/users.service';
+import { UsersApi} from '../@core/backend/common/api/users.api';
+import { HttpService} from '../@core/backend/common/api/http.service';
+
+
+
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -106,6 +113,10 @@ export class ThemeModule {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
       providers: [
+        UserData,
+        UsersService,
+        UsersApi,
+        HttpService,
         ...NbThemeModule.forRoot(
           {
             name: 'default',

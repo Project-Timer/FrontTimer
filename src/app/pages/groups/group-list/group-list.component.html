@@ -1,0 +1,22 @@
+<h1 class="m-0">
+  Groups
+    <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="showFormGroup()">
+      <nb-icon icon="{{ show === false ? 'plus-outline' : 'minus-outline' }}"></nb-icon>
+    </button>
+</h1>
+
+<ng-container *ngIf="show">
+  <ngx-group-form (someEvent)="getAllGroups()"></ngx-group-form>
+</ng-container>
+
+<ng-container *ngIf="groups.length > 0; then list else empty"></ng-container>
+<ng-template #list>
+  <div class="row mt-4">
+    <div class="col-6" *ngFor="let group of groups">
+      <ngx-group-box [group]="group" [user]="user"></ngx-group-box>
+    </div>
+  </div>
+</ng-template>
+<ng-template #empty>
+  <div class="h6 mt-4">There are no groups</div>
+</ng-template>

@@ -19,6 +19,7 @@ import { AuthModule } from './@auth/auth.module';
     ThemeModule.forRoot(),
     AuthModule.forRoot(),
     CoreModule.forRoot(),
+    
   ],
   bootstrap: [AppComponent],
   providers: [

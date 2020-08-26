@@ -4,6 +4,7 @@ import { NbTokenService, NbAuthJWTToken } from '@nebular/auth'
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil, takeWhile } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -47,7 +48,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
-    private tokenService: NbTokenService) {   
+    private tokenService: NbTokenService,
+    protected router: Router) {   
 
   }
 
@@ -62,8 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     this.userMenu = [
       { title: 'Profil', icon: 'person-outline', link: 'auth/profile' },
-      { title: 'Paramètres', icon: 'settings-2-outline', link: '' },
-      { title: 'Se Déconnecter', icon: 'log-out-outline', link: '/auth/logout' },
+      { title: 'Log out', icon: 'log-out-outline', link: '/auth/logout' },
     ];
 
     this.currentTheme = this.themeService.currentTheme;
@@ -94,7 +95,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   goToHome() {
-    this.menuService.navigateHome();
+    // this.menuService.navigateHome("/pages/dashboard");
+    this.router.navigate(['/pages/dashboard'])
+
   }
 
   ngOnDestroy() {

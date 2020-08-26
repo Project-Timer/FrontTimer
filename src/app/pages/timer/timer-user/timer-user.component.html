@@ -1,0 +1,25 @@
+<h1 class="m-0">My timers</h1>
+
+<ng-container *ngIf="timers.length > 0; then list else empty"></ng-container>
+
+<ng-template #list>
+<table class="mt-4">
+  <thead>
+  <tr>
+    <th>Project</th>
+    <th>Date</th>
+    <th>Work time</th>
+    <th>Accomplished tasks</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let timer of timers">
+    <tr ngx-timer-user-row [timer]="timer" (someEvent)="getTimers()"></tr>
+  </ng-container>
+  </tbody>
+</table>
+</ng-template>
+<ng-template #empty>
+  <div class="h6 mt-4">You currently have no timer</div>
+</ng-template>

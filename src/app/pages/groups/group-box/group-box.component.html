@@ -1,0 +1,28 @@
+<nb-card>
+  <nb-card-header>
+    <div class="cardHeader">
+      <div class="d-inline-block text-left w-75">
+        {{ group.name }} - <small>Created on {{ group.dateCreate|date:'mediumDate' }}</small>
+      </div>
+      <div class="d-inline-block text-right w-25">
+        <button (click)="showMembers()" nbButton size="tiny" shape="semi-round" status="primary" class="mr-2">
+          <nb-icon icon="people-outline"></nb-icon>
+        </button>
+        <a [routerLink]="'view/'+[group._id]">
+          <ng-container *ngIf="group.admin._id === user._id; then settings else eye"></ng-container>
+          <ng-template #settings>
+            <button nbButton size="tiny" shape="semi-round" status="warning">
+              <nb-icon icon="settings-outline"></nb-icon>
+            </button>
+          </ng-template>
+          <ng-template #eye>
+            <button nbButton size="tiny" shape="semi-round" status="info">
+              <nb-icon icon="eye-outline"></nb-icon>
+            </button>
+          </ng-template>
+        </a>
+      </div>
+    </div>
+  </nb-card-header>
+  <ngx-member-list [members]="group.users" [show]="show"></ngx-member-list>
+</nb-card>

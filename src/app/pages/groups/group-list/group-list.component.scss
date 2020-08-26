@@ -1,0 +1,19 @@
+.nb-layout {
+  width: 100%;
+  height: 100%;
+}
+
+.nb-layout-column:first-child {
+  flex: 2 !important;
+  background: #e3e6f9;
+}
+
+.nb-layout-column:last-child {
+  flex: 1 !important;
+  background: #f4f4f7;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+}
