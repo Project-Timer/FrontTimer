@@ -125,6 +125,9 @@ export class GroupViewComponent implements OnInit {
 
   saveAdmin() {
     this.group.admin = this.selectAdmin;
+    this.group.users = this.group.users.filter(obj => {
+      return obj._id !== this.selectAdmin;
+    });
     this.editAdmin = false;
     this.save();
     this.selectAdmin = null;
