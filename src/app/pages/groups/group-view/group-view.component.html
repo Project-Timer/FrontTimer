@@ -26,7 +26,7 @@
         Administrator of the group
       </b>
       <p class="mb-1">
-        {{ group.admin.firstName|uppercase }} {{ group.admin.lastName }}
+        {{ group.admin.firstName }} {{ group.admin.lastName|uppercase }}
         <small>({{ group.admin.email }})</small>
       </p>
       <button nbButton size="tiny" shape="semi-round" status="warning" (click)="editAdmin = true;" *ngIf="group.admin._id === user._id">
@@ -36,7 +36,7 @@
     <nb-card class="member admin" *ngIf="group.admin._id === user._id && editAdmin">
       <nb-select [(ngModel)]="selectAdmin" placeholder="Choose members" shape="semi-round" class="search-input mb-1">
         <nb-option *ngFor="let member of adminList"
-                   value="{{ member._id }}">{{ member.firstName|uppercase }} {{ member.lastName }}</nb-option>
+                   value="{{ member._id }}">{{ member.firstName }} {{ member.lastName|uppercase }}</nb-option>
       </nb-select>
       <div class="row">
         <div class="col-6">
@@ -65,7 +65,7 @@
 <ng-container *ngIf="show">
   <nb-select [(ngModel)]="selectedValue" multiple placeholder="Choose members" shape="semi-round" class="search-input">
     <nb-option *ngFor="let member of members"
-               value="{{ member._id }}">{{ member.firstName|uppercase }} {{ member.lastName }}</nb-option>
+               value="{{ member._id }}">{{ member.firstName }} {{ member.lastName|uppercase }} </nb-option>
   </nb-select>
   <button nbButton size="tiny" shape="semi-round" status="success" class="ml-2" (click)="addUser()">
     <nb-icon icon="checkmark-outline"></nb-icon>
@@ -80,7 +80,7 @@
         <div class="row">
           <div class="col-10">
             <p>
-              {{ member.firstName|uppercase }} {{ member.lastName }}
+              {{ member.firstName }} {{ member.lastName|uppercase }}
             </p>
             <p>
               {{ member.email }}
